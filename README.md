@@ -1,0 +1,2 @@
+# weatherinfo
+Uses OpenWeatherMap API
