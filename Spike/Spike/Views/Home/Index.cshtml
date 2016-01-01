@@ -2,30 +2,188 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div>
+    <div>
+        Your Current Location:
+        <span id="currentLocation" />
+        <input id="StreetAddress" />
+        <input id="City" />
+        <input id="StateCode" />
+        <input id="PostalCode" />
+        <input id="CountryCode" />
+        <br />
+        Lat: <input id="Latitude" />
+        Lon: <input id="Longitude" />
+    </div>
+    <div>
+        Your Current Weather:
+        <input id="currentWeather" />
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+@section scripts {
+    <script language="javascript" type="text/javascript">
+        function GeoLocator() {
+            this.hasGeoLocation = navigator && navigator.geolocation;
+            this.Location = 0;
+            this.ErrorMessage = "";
+            this.LatitudeInput = $("#Latitude");
+            this.LongitudeInput = $("#Longitude");
+            this.AddressInfo = "";
+            this.StreetAddress = $("#StreetAddress");
+            //this.StreetAddress2 = $("#StreetAddress2");
+            this.City = $("#City");
+            this.StateCode = $("#StateCode");
+            this.PostalCode = $("#PostalCode");
+            this.CountryCode = $("#CountryCode");
+            $("#updateButton").click(this.setLocationByAddress.bind(this));
+        }
+
+        GeoLocator.prototype.getCurrentLocation =
+            function () {
+                if (this.hasGeoLocation) {
+                    navigator.geolocation.getCurrentPosition(this.getCurrentLocationSuccess.bind(this), this.getCurrentLocationError.bind(this));
+                }
+            };
+
+        GeoLocator.prototype.getCurrentLocationSuccess =
+            function (position) {
+                this.Location = position;
+                this.LatitudeInput.val(this.Location.coords.latitude);
+                this.LongitudeInput.val(this.Location.coords.longitude);
+                var hasAddress = $("#HasAddress");
+                //if (hasAddress.val() === "False") {
+                this.setAddress();
+                //}
+            };
+
+        GeoLocator.prototype.getCurrentLocationError =
+            function (msg) {
+                this.ErrorMessage = msg;
+            };
+
+        // TODO: this code has a dependency on Google maps api .... need to segregate this in case we need to disable or switch out
+        GeoLocator.prototype.setAddress =
+            function () {
+
+                var geocoder = new google.maps.Geocoder();
+
+                var location = new google.maps.LatLng(this.Location.coords.latitude, this.Location.coords.longitude);
+
+                geocoder.geocode({ 'latLng': location }, this.setAddressCallback.bind(this));
+            };
+
+        GeoLocator.prototype.setAddressCallback =
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results && results[0]) {
+                        this.AddressInfo = results[0].address_components;
+                        var streetNumber = "";
+                        var streetName = "";
+                        var addressComponentsCount = this.AddressInfo.length;
+                        for (var i = 0; i < addressComponentsCount; i++) {
+                            var longName = this.AddressInfo[i].long_name;
+                            var shortName = this.AddressInfo[i].short_name;
+                            switch (this.AddressInfo[i].types[0]) {
+                                case "street_number":
+                                    streetNumber = longName;
+                                    break;
+                                case "route":
+                                    streetName = longName;
+                                    break;
+                                case "locality":
+                                    this.City.val(longName);
+                                    break;
+                                case "administrative_area_level_1":
+                                    this.StateCode.val(shortName);
+                                    //this.StateCode.selectmenu('refresh');
+                                    break;
+                                case "country":
+                                    this.CountryCode.val(shortName);
+                                    //this.CountryCode.selectmenu('refresh');
+                                    break;
+                                case "postal_code":
+                                    this.PostalCode.val(longName);
+                                    break;
+                            }
+                        }
+                        this.StreetAddress.val((streetNumber + " " + streetName).trim());
+                    }
+                }
+            };
+
+        // TODO: this code has a dependency on Google maps api .... need to segregate this in case we need to disable or switch out
+        GeoLocator.prototype.setLocationByAddress =
+            function () {
+                var geocoder = new google.maps.Geocoder();
+
+                // TODO: make this more int'l friendly
+                var address = this.StreetAddress.val() + " " + this.City.val() + ", " + this.StateCode.val() + " " + this.PostalCode.val() + " " + this.CountryCode.val();
+
+                geocoder.geocode({ 'address': address }, this.setLocationByAddressCallback.bind(this));
+
+                return false;
+            };
+
+        GeoLocator.prototype.setLocationByAddressCallback =
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        this.LatitudeInput.val(results[0].geometry.location.lat());
+                        this.LongitudeInput.val(results[0].geometry.location.lng());
+                    }
+                }
+
+                $("form").submit();
+            };
+
+        function JurisdictionHelper() {
+            this.StateList = "";
+            this.StateCode = $("#StateCode");
+            this.CountryCode = $("#CountryCode");
+            this.CountryCode.change(this.getStateListByCountry.bind(this));
+        }
+
+        JurisdictionHelper.prototype.getStateListByCountry =
+            function () {
+                var countryCode = this.CountryCode.val();
+
+                $.ajax({
+                    url: "/profile/GetStatesByCountry",
+                    type: "GET",
+                    data: { countryCode: countryCode, },
+                    context: $(this),
+                    success: this.getStateListByCountrySuccess.bind(this),
+                    error: function (xhr, status, error) {
+                        alert("Error: " + xhr.responseText);
+                    }
+                });
+            };
+
+        JurisdictionHelper.prototype.getStateListByCountrySuccess =
+            function (result) {
+                if (result) {
+                    this.StateList = result;
+                    var stateCount = this.StateList.length;
+                    this.StateCode.empty();
+                    for (var i = 0; i < stateCount; i++) {
+                        var option = "<option value=\"" + this.StateList[i].Code + "\">" + this.StateList[i].Name + "</option>";
+                        this.StateCode.append(option);
+                    }
+                    this.StateCode.val("");
+                    this.StateCode.selectmenu('refresh');
+                }
+            };
+
+        var geoLocator;
+        var jurisdictionHelper;
+
+        $(document).ready(function () {
+            geoLocator = new GeoLocator();
+            geoLocator.getCurrentLocation();
+            //jurisdictionHelper = new JurisdictionHelper();
+        });
+
+
+    </script>
+}

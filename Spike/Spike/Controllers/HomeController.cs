@@ -9,6 +9,12 @@ namespace Spike.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult GetWeather()
+        {
+            return Json(new { Result = true }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
