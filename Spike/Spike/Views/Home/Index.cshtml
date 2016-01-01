@@ -54,6 +54,7 @@
                 var hasAddress = $("#HasAddress");
                 //if (hasAddress.val() === "False") {
                 this.setAddress();
+                this.setWeather();
                 //}
             };
 
@@ -137,6 +138,43 @@
                 $("form").submit();
             };
 
+        GeoLocator.prototype.setWeather =
+            function () {
+                weatherHelper = new WeatherHelper();
+                weatherHelper.getCurrentWeather();
+            };
+
+        function WeatherHelper() {
+            this.Latitude = $("#Latitude");
+            this.Longitude = $("#Longitude");
+            this.CurrentWeather = $("#currentWeather");
+        }
+
+        WeatherHelper.prototype.getCurrentWeather =
+            function () {
+                var latitude = this.Latitude.val();
+                var longitude = this.Longitude.val();
+
+                $.ajax({
+                    url: "/home/GetWeather",
+                    type: "GET",
+                    data: { latitude: latitude, longitude: longitude, },
+                    context: $(this),
+                    success: this.getGetCurrentWeatherSuccess.bind(this),
+                    error: function (xhr, status, error) {
+                        alert("Error: " + xhr.responseText);
+                    }
+                });
+            };
+
+        WeatherHelper.prototype.getGetCurrentWeatherSuccess =
+            function (result) {
+                if (result) {
+                    this.CurrentWeather.val(result.Weather[0].Description);
+                }
+            };
+
+
         function JurisdictionHelper() {
             this.StateList = "";
             this.StateCode = $("#StateCode");
@@ -176,7 +214,7 @@
             };
 
         var geoLocator;
-        var jurisdictionHelper;
+        //var jurisdictionHelper;
 
         $(document).ready(function () {
             geoLocator = new GeoLocator();
