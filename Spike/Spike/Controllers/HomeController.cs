@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Web.Mvc;
@@ -34,7 +35,8 @@ namespace Spike.Controllers
 
         private string GetWeatherInfoApi(decimal latitude, decimal longitude)
         {
-            string apiKey = System.IO.File.ReadAllText(Server.MapPath("/env/key.txt")); 
+            var keyFromConfig = ConfigurationManager.AppSettings["OpenWeatherMapApiKey"];
+            string apiKey = string.IsNullOrWhiteSpace(keyFromConfig) ? System.IO.File.ReadAllText(Server.MapPath("/env/key.txt")) : keyFromConfig; 
 
             string openWeatherMapApiFormat = "http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}";
             var client = new WebClient();
