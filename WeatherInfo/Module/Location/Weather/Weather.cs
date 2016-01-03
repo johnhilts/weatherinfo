@@ -1,4 +1,6 @@
-﻿namespace Location.Weather
+﻿using System;
+
+namespace Location.Weather
 {
     /// <summary>
     /// Weather Entity
@@ -18,7 +20,8 @@
 
         public WeatherInfoModel GetCurrentWeather()
         {
-            return new WeatherInfoModel();
+            var currentWeather = _weatherService.GetCurrentWeatherByCurrentLocation(_address.Latitude, _address.Longitude);
+            return currentWeather;
         }
 
         public WeatherInfoModel ConvertTo(UnitType unitType, WeatherInfoModel model)
@@ -26,11 +29,15 @@
             switch (unitType)
             {
                 case UnitType.Celsius:
-                    break;
+                    _unitType = UnitType.Celsius;
+                    var celsius = (model.Temperature - 32) / 1.8m;
+                    model.Temperature = celsius;
+                    model.UnitType = UnitType.Celsius;
+                    return model;
                 case UnitType.Fahrenheit:
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException("Unsupported Unit Type");
             }
 
             return model;
