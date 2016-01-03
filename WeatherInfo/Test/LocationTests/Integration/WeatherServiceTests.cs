@@ -2,11 +2,7 @@
 using Location.Map;
 using Location.Weather;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace LocationTests.Integration
 {
@@ -18,6 +14,15 @@ namespace LocationTests.Integration
         {
             // TODO: this needs to be run only *once* for the entire test suite
             Mapper.Initialize(x => x.AddProfile<MapProfile>());
+        }
+
+        [SetUp]
+        protected void SetUp()
+        {
+            bool isAppHarbor;
+            var isAppHarborConfig = ConfigurationManager.AppSettings["IsAppHarbor"];
+            bool.TryParse(isAppHarborConfig, out isAppHarbor);
+            if (isAppHarbor) Assert.Ignore("Integration Test: do not run on AppHarbor.");
         }
 
         [Test]
