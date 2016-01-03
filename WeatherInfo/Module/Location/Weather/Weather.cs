@@ -29,10 +29,9 @@ namespace Location.Weather
             switch (unitType)
             {
                 case UnitType.Celsius:
-                    _unitType = UnitType.Celsius;
+                    _unitType = model.UnitType = UnitType.Celsius;
                     var celsius = (model.Temperature - 32) / 1.8m;
                     model.Temperature = celsius;
-                    model.UnitType = UnitType.Celsius;
                     return model;
                 case UnitType.Fahrenheit:
                     break;
