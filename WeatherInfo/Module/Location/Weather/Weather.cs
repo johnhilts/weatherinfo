@@ -34,7 +34,10 @@ namespace Location.Weather
                     model.Temperature = celsius;
                     return model;
                 case UnitType.Fahrenheit:
-                    break;
+                    _unitType = model.UnitType = UnitType.Fahrenheit;
+                    var fahrenheit = model.Temperature * 1.8m + 32;
+                    model.Temperature = fahrenheit;
+                    return model;
                 default:
                     throw new ArgumentOutOfRangeException("Unsupported Unit Type");
             }
