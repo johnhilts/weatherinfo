@@ -46,6 +46,7 @@
     <Compile Include="Weather\IWeatherService.cs" />
     <Compile Include="Weather\UnitType.cs" />
     <Compile Include="Weather\Weather.cs" />
+    <Compile Include="Weather\WeatherDataModel.cs" />
     <Compile Include="Weather\WeatherInfoModel.cs" />
     <Compile Include="Weather\WeatherService.cs" />
   </ItemGroup>
