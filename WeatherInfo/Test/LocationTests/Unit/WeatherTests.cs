@@ -15,54 +15,35 @@ namespace LocationTests.Unit
             // do nothing
         }
 
-        [TestCase(32, 0)]
-        [TestCase(50, 10)]
-        [TestCase(-4, -20)]
-        [TestCase(23, -5)]
-        [TestCase(68, 20)]
-        [TestCase(86, 30)]
-        [TestCase(104, 40)]
-        [TestCase(212, 100)]
-        public void Temperature_Fahrenheit_ConvertsCelsius(decimal actualTemperature, decimal expectedTemperature)
+        [TestCase(32, 0, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(50, 10, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(-4, -20, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(23, -5, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(68, 20, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(86, 30, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(104, 40, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(212, 100, UnitType.Fahrenheit, UnitType.Celsius)]
+        [TestCase(0, 32, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(10, 50, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(-20, -4, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(-5, 23, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(20, 68, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(30, 86, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(40, 104, UnitType.Celsius, UnitType.Fahrenheit)]
+        [TestCase(100, 212, UnitType.Celsius, UnitType.Fahrenheit)]
+        public void Temperature_Typical_Converts(decimal actualTemperature, decimal expectedTemperature, UnitType fromUnitType, UnitType toUnitType)
         {
             // arrange
             var address = new Address();
             var weatherServiceMock = new Mock<IWeatherService>();
-            var fahrenheitWeather = new WeatherInfoModel { UnitType = UnitType.Fahrenheit, Temperature = actualTemperature, };
+            var fahrenheitWeather = new WeatherInfoModel { UnitType = fromUnitType, Temperature = actualTemperature, };
             weatherServiceMock.Setup(m => m.GetCurrentWeatherByCurrentLocation(It.IsAny<decimal>(), It.IsAny<decimal>())).Returns(fahrenheitWeather);
 
             var weather = new Weather(UnitType.Fahrenheit, address, weatherServiceMock.Object);
 
             // act
             var currentWeather = weather.GetCurrentWeather();
-            currentWeather = weather.ConvertTo(UnitType.Celsius, currentWeather);
-
-            // assert
-            Assert.That(currentWeather.Temperature, Is.EqualTo(expectedTemperature), "Wrong Temperature");
-
-        }
-
-        [TestCase(0, 32)]
-        [TestCase(10, 50)]
-        [TestCase(-20, -4)]
-        [TestCase(-5, 23)]
-        [TestCase(20, 68)]
-        [TestCase(30, 86)]
-        [TestCase(40, 104)]
-        [TestCase(100, 212)]
-        public void Temperature_Celsius_ConvertsFahrenheit(decimal actualTemperature, decimal expectedTemperature)
-        {
-            // arrange
-            var address = new Address();
-            var weatherServiceMock = new Mock<IWeatherService>();
-            var celsiusWeather = new WeatherInfoModel { UnitType = UnitType.Celsius, Temperature = actualTemperature, };
-            weatherServiceMock.Setup(m => m.GetCurrentWeatherByCurrentLocation(It.IsAny<decimal>(), It.IsAny<decimal>())).Returns(celsiusWeather);
-
-            var weather = new Weather(UnitType.Fahrenheit, address, weatherServiceMock.Object);
-
-            // act
-            var currentWeather = weather.GetCurrentWeather();
-            currentWeather = weather.ConvertTo(UnitType.Fahrenheit, currentWeather);
+            currentWeather = weather.ConvertTo(toUnitType, currentWeather);
 
             // assert
             Assert.That(currentWeather.Temperature, Is.EqualTo(expectedTemperature), "Wrong Temperature");
