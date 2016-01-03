@@ -3,6 +3,6 @@
     public enum UnitType
     {
         Celsius,
-        Fahhrenheit,
+        Fahrenheit,
     }
 }

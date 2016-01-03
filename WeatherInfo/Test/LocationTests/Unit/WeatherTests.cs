@@ -20,7 +20,7 @@ namespace LocationTests.Unit
             // arrange
             var address = new Address();
 
-            var weather = new Weather(UnitType.Fahhrenheit, address, null);
+            var weather = new Weather(UnitType.Fahrenheit, address, weatherServiceMock.Object);
 
             // act
             var currentWeather = weather.GetCurrentWeather();
@@ -29,5 +29,6 @@ namespace LocationTests.Unit
             Assert.That(currentWeather.Temperature, Is.EqualTo(0), "Wrong Temperature");
 
         }
+
     }
 }

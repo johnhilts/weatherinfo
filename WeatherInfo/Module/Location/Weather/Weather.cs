@@ -27,7 +27,7 @@
             {
                 case UnitType.Celsius:
                     break;
-                case UnitType.Fahhrenheit:
+                case UnitType.Fahrenheit:
                     break;
                 default:
                     break;
