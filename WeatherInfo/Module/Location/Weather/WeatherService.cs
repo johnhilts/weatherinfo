@@ -12,7 +12,7 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        public WeatherInfoModel GetCurrentWeatherByCurrentLocation(decimal latitude, decimal longitude)
+        public WeatherInfoModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
         {
             return new WeatherInfoModel();
         }
@@ -23,7 +23,7 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        public WeatherInfoModel GetForecastedWeatherByCurrentLocation(decimal latitude, decimal longitude)
+        public WeatherInfoModel GetForecastedWeatherByLocation(decimal latitude, decimal longitude)
         {
             return new WeatherInfoModel();
         }
@@ -34,7 +34,7 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        public WeatherInfoModel GetHistoricalWeatherByCurrentLocation(decimal latitude, decimal longitude)
+        public WeatherInfoModel GetHistoricalWeatherByLocation(decimal latitude, decimal longitude)
         {
             return new WeatherInfoModel();
         }

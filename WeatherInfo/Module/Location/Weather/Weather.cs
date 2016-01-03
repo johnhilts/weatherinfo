@@ -20,7 +20,7 @@ namespace Location.Weather
 
         public WeatherInfoModel GetCurrentWeather()
         {
-            var currentWeather = _weatherService.GetCurrentWeatherByCurrentLocation(_address.Latitude, _address.Longitude);
+            var currentWeather = _weatherService.GetCurrentWeatherByLocation(_address.Latitude, _address.Longitude);
             return currentWeather;
         }
 

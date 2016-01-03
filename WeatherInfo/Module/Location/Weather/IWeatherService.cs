@@ -11,7 +11,7 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        WeatherInfoModel GetCurrentWeatherByCurrentLocation(decimal latitude, decimal longitude);
+        WeatherInfoModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude);
 
         /// <summary>
         /// Get Forecasted Weather by Location
@@ -19,7 +19,7 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        WeatherInfoModel GetForecastedWeatherByCurrentLocation(decimal latitude, decimal longitude);
+        WeatherInfoModel GetForecastedWeatherByLocation(decimal latitude, decimal longitude);
 
         /// <summary>
         /// Get Historical Weather by Location
@@ -27,6 +27,6 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        WeatherInfoModel GetHistoricalWeatherByCurrentLocation(decimal latitude, decimal longitude);
+        WeatherInfoModel GetHistoricalWeatherByLocation(decimal latitude, decimal longitude);
     }
 }

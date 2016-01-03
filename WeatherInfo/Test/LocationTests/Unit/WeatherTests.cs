@@ -37,7 +37,7 @@ namespace LocationTests.Unit
             var address = new Address();
             var weatherServiceMock = new Mock<IWeatherService>();
             var fahrenheitWeather = new WeatherInfoModel { UnitType = fromUnitType, Temperature = actualTemperature, };
-            weatherServiceMock.Setup(m => m.GetCurrentWeatherByCurrentLocation(It.IsAny<decimal>(), It.IsAny<decimal>())).Returns(fahrenheitWeather);
+            weatherServiceMock.Setup(m => m.GetCurrentWeatherByLocation(It.IsAny<decimal>(), It.IsAny<decimal>())).Returns(fahrenheitWeather);
 
             var weather = new Weather(UnitType.Fahrenheit, address, weatherServiceMock.Object);
 
