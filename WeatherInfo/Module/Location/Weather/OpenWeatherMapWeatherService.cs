@@ -5,7 +5,7 @@ using System;
 
 using AutoMapper;
 
-using Location.Weather.api;
+using Location.Weather.OpenWeatherMap.api;
 
 namespace Location.Weather
 {

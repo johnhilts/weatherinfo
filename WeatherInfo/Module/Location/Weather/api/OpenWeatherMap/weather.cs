@@ -1,4 +1,4 @@
-﻿namespace Location.Weather.api
+﻿namespace Location.Weather.OpenWeatherMap.api
 {
     public class weather
         {
