@@ -1,29 +1,12 @@
-﻿using AutoMapper;
-using Location.Map;
+﻿using NUnit.Framework;
+
 using Location.Weather;
-using NUnit.Framework;
-using System.IO;
 
 namespace LocationTests.Integration
 {
     [TestFixture]
-    public class WeatherServiceTests
+    public class WeatherServiceTests : BaseIntegrationTest
     {
-
-        private readonly string _keyPath = "../../Integration/env/key.txt";
-
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
-        {
-            // TODO: this needs to be run only *once* for the entire test suite
-            Mapper.Initialize(x => x.AddProfile<MapProfile>());
-        }
-
-        [SetUp]
-        protected void SetUp()
-        {
-            if (!File.Exists(_keyPath)) Assert.Ignore("Integration Test: do not run outside of dev environment.");
-        }
 
         [Test]
         public void CurrentWeather_ValidLocation_GetWeather()
