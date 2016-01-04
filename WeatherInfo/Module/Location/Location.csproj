@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Weather\api\OpenWeatherMap\weather.cs" />
     <Compile Include="Weather\api\OpenWeatherMap\ForecastWeatherDataModel.cs" />
+    <Compile Include="Weather\api\WorldWeatherOnline\data.cs" />
+    <Compile Include="Weather\api\WorldWeatherOnline\HistoricalWeatherDataModel.cs" />
+    <Compile Include="Weather\api\WorldWeatherOnline\weather.cs" />
+    <Compile Include="Weather\api\WorldWeatherOnline\WorldWeatherOnlineWeatherService.cs" />
     <Compile Include="Weather\IWeatherService.cs" />
     <Compile Include="Weather\UnitType.cs" />
     <Compile Include="Weather\Weather.cs" />

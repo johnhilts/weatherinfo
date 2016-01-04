@@ -2,6 +2,7 @@
 
 using Location.Weather;
 using Location.Weather.OpenWeatherMap.api;
+using Location.Weather.WorldWeatherOnline.api;
 
 namespace Location.Map
 {
@@ -14,6 +15,9 @@ namespace Location.Map
 
             CreateMap<ForecastWeatherDataModel, WeatherInfoModel>()
                 .ForMember(d => d.Temperature, o => o.MapFrom(source => source.List[0].Temp.Day));
+
+            CreateMap<HistoricalWeatherDataModel, WeatherInfoModel>()
+                .ForMember(d => d.Temperature, o => o.MapFrom(source => source.Data.Weather[0].MaxTempF));
 
         }
     }

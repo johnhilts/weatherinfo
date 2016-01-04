@@ -102,6 +102,7 @@ namespace Location.Weather.OpenWeatherMap.api
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
+        /// <remarks>Not Implemented</remarks>
         public WeatherInfoModel GetHistoricalWeatherByLocation(decimal latitude, decimal longitude)
         {
             throw new NotImplementedException("OpenWeatherMap does not offer free historical data");
