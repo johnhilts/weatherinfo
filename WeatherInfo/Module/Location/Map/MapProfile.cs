@@ -11,6 +11,10 @@ namespace Location.Map
         {
             CreateMap<CurrentWeatherDataModel, WeatherInfoModel>()
                 .ForMember(d => d.Temperature, o => o.MapFrom(source => source.Main.Temp));
+
+            CreateMap<ForecastWeatherDataModel, WeatherInfoModel>()
+                .ForMember(d => d.Temperature, o => o.MapFrom(source => source.List[0].Temp.Day));
+
         }
     }
 }
