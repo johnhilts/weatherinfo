@@ -6,7 +6,7 @@ using System;
 namespace LocationTests.Integration
 {
     [TestFixture]
-    public class WeatherServiceTests : BaseIntegrationTest
+    public class OpenWeatherMapWeatherServiceTests : BaseIntegrationTest
     {
 
         [Test]

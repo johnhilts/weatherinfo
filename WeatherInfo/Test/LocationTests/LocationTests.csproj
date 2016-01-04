@@ -72,7 +72,7 @@
   <ItemGroup>
     <Compile Include="BaseIntegrationTest.cs" />
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Integration\WeatherServiceTests.cs" />
+    <Compile Include="Integration\OpenWeatherMapWeatherServiceTests.cs" />
     <Compile Include="Unit\WeatherTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
