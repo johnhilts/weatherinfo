@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System;
+
+using NUnit.Framework;
 
 using Location.Weather;
-using System;
 
 namespace LocationTests.Integration
 {
