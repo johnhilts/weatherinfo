@@ -60,7 +60,7 @@
     <Compile Include="Weather\Weather.cs" />
     <Compile Include="Weather\api\OpenWeatherMap\CurrentWeatherDataModel.cs" />
     <Compile Include="Weather\WeatherInfoModel.cs" />
-    <Compile Include="Weather\OpenWeatherMapWeatherService.cs" />
+    <Compile Include="Weather\api\OpenWeatherMap\OpenWeatherMapWeatherService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

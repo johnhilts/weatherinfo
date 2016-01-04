@@ -36,7 +36,7 @@ namespace Spike.Controllers
         private string GetWeatherInfoApi(decimal latitude, decimal longitude)
         {
             var keyFromConfig = ConfigurationManager.AppSettings["OpenWeatherMapApiKey"];
-            string apiKey = string.IsNullOrWhiteSpace(keyFromConfig) ? System.IO.File.ReadAllText(Server.MapPath("/env/key.txt")) : keyFromConfig; 
+            string apiKey = string.IsNullOrWhiteSpace(keyFromConfig) ? System.IO.File.ReadAllText(Server.MapPath("/env/openWeatherMapKey.txt")) : keyFromConfig; 
 
             string openWeatherMapApiFormat = "http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}";
             var client = new WebClient();

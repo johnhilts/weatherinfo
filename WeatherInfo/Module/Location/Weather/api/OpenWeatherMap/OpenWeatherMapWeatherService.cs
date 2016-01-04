@@ -5,9 +5,7 @@ using System;
 
 using AutoMapper;
 
-using Location.Weather.OpenWeatherMap.api;
-
-namespace Location.Weather
+namespace Location.Weather.OpenWeatherMap.api
 {
     /// <summary>
     /// Service to retrieve weather related information
