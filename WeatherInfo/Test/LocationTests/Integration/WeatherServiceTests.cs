@@ -22,7 +22,7 @@ namespace LocationTests.Integration
         [SetUp]
         protected void SetUp()
         {
-            if (!File.Exists(_keyPath)) Assert.Ignore("Integration Test: do not run outside of test environment.");
+            if (!File.Exists(_keyPath)) Assert.Ignore("Integration Test: do not run outside of dev environment.");
         }
 
         [Test]
