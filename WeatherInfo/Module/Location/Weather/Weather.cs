@@ -41,8 +41,6 @@ namespace Location.Weather
                 default:
                     throw new ArgumentOutOfRangeException("Unsupported Unit Type");
             }
-
-            return model;
         }
 
     }
