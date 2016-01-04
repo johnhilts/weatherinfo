@@ -106,7 +106,7 @@ namespace Location.Weather
         /// <returns>stongly typed weather information</returns>
         public WeatherInfoModel GetHistoricalWeatherByLocation(decimal latitude, decimal longitude)
         {
-            return new WeatherInfoModel();
+            throw new NotImplementedException("OpenWeatherMap does not offer free historical data");
         }
     }
 }
