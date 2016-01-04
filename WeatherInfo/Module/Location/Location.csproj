@@ -53,10 +53,11 @@
     <Compile Include="Location.cs" />
     <Compile Include="Map\MapProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Weather\api\weather.cs" />
     <Compile Include="Weather\IWeatherService.cs" />
     <Compile Include="Weather\UnitType.cs" />
     <Compile Include="Weather\Weather.cs" />
-    <Compile Include="Weather\WeatherDataModel.cs" />
+    <Compile Include="Weather\api\CurrentWeatherDataModel.cs" />
     <Compile Include="Weather\WeatherInfoModel.cs" />
     <Compile Include="Weather\WeatherService.cs" />
   </ItemGroup>

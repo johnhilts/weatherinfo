@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+
 using Location.Weather;
+using Location.Weather.api;
 
 namespace Location.Map
 {
@@ -7,7 +9,7 @@ namespace Location.Map
     {
         protected override void Configure()
         {
-            CreateMap<WeatherDataModel, WeatherInfoModel>()
+            CreateMap<CurrentWeatherDataModel, WeatherInfoModel>()
                 .ForMember(d => d.Temperature, o => o.MapFrom(source => source.Main.Temp));
         }
     }
