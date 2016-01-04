@@ -2,13 +2,16 @@
 using Location.Map;
 using Location.Weather;
 using NUnit.Framework;
-using System.Configuration;
+using System.IO;
 
 namespace LocationTests.Integration
 {
     [TestFixture]
     public class WeatherServiceTests
     {
+
+        private readonly string _keyPath = "../../Integration/env/key.txt";
+
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
@@ -19,17 +22,14 @@ namespace LocationTests.Integration
         [SetUp]
         protected void SetUp()
         {
-            bool isAppHarbor;
-            var isAppHarborConfig = ConfigurationManager.AppSettings["IsAppHarbor"];
-            bool.TryParse(isAppHarborConfig, out isAppHarbor);
-            if (isAppHarbor) Assert.Ignore("Integration Test: do not run on AppHarbor.");
+            if (!File.Exists(_keyPath)) Assert.Ignore("Integration Test: do not run outside of test environment.");
         }
 
         [Test]
         public void CurrentWeather_ValidLocation_GetWeather()
         {
             // arrange 
-            var weatherService = new OpenWeatherMapWeatherService("../../Integration/env/key.txt");
+            var weatherService = new OpenWeatherMapWeatherService(_keyPath);
 
             // act
             var currentWeather = weatherService.GetCurrentWeatherByLocation(0, 0);
