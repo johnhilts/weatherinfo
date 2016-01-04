@@ -19,7 +19,7 @@
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        WeatherInfoModel GetForecastedWeatherByLocation(decimal latitude, decimal longitude);
+        WeatherInfoModel GetForecastWeatherByLocation(decimal latitude, decimal longitude);
 
         /// <summary>
         /// Get Historical Weather by Location

@@ -63,7 +63,7 @@ namespace Location.Weather
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <returns>stongly typed weather information</returns>
-        public WeatherInfoModel GetForecastedWeatherByLocation(decimal latitude, decimal longitude)
+        public WeatherInfoModel GetForecastWeatherByLocation(decimal latitude, decimal longitude)
         {
             return new WeatherInfoModel();
         }
