@@ -1,6 +1,26 @@
-﻿@{
+﻿@using WeatherInfo.Web.Models.Weather
+@model MainViewModel
+@{
     ViewBag.Title = "Main";
 }
 
 <h2>Locations</h2>
+
+<div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <span class="badge">54&deg; F</span>
+            Current Location (city name)
+        </li>
+    </ul>
+    @foreach (var item in Model.MainItems)
+    {
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge">@item.CurrentTemperature&deg; @Model.UnitType</span>
+                @item.CityName
+            </li>
+        </ul>
+    }
+</div>
 
