@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace WeatherInfo.Web
 {
@@ -10,6 +9,10 @@ namespace WeatherInfo.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/weatherInfo").Include(
+                        "~/js/GeoLocator.js?v=1",
+                        "~/js/WeatherInfo.main.js?v=1"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

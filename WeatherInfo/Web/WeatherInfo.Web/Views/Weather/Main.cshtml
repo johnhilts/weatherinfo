@@ -9,7 +9,7 @@
 <div>
     <ul class="list-group">
         <li class="list-group-item">
-            <span class="badge">54&deg; F</span>
+            <span class="badge"><span id="currentLocationTemperature">54</span>&deg; <span id="currentLocationUnitType">F</span></span>
             Current Location (city name)
         </li>
     </ul>
@@ -24,3 +24,14 @@
     }
 </div>
 
+@section scripts {
+    <script language="javascript" type="text/javascript">
+        var geoLocator;
+
+        $(document).ready(function () {
+            geoLocator = new weatherInfo.geoLocator();
+            geoLocator.getCurrentLocation();
+        });
+
+    </script>
+}

@@ -33,7 +33,11 @@
         </footer>
     </div>
 
+    <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    @Scripts.Render("~/js/WeatherInfo.main.js")
+    @Scripts.Render("~/js/GeoLocator.js")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/weatherInfo")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
