@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spike", "Spike\Spike.csproj", "{85557A38-7393-448C-887C-9942FCAD8285}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{3F7C2CC6-3403-475B-BD18-E5C8D160BB46}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Location", "Module\Location\Location.csproj", "{0569BE38-B68E-4C67-B4DB-7D43C163D2AB}"
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{85557A38-7393-448C-887C-9942FCAD8285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85557A38-7393-448C-887C-9942FCAD8285}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85557A38-7393-448C-887C-9942FCAD8285}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85557A38-7393-448C-887C-9942FCAD8285}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0569BE38-B68E-4C67-B4DB-7D43C163D2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0569BE38-B68E-4C67-B4DB-7D43C163D2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0569BE38-B68E-4C67-B4DB-7D43C163D2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
