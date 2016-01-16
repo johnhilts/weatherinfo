@@ -5,9 +5,9 @@
         this.hasGeoLocation = navigator && navigator.geolocation;
         this.location = 0;
         this.errorMessage = "";
-        this.City = $("#City");
-        this.StateCode = $("#StateCode");
-        this.CountryCode = $("#CountryCode");
+        this.City = "";
+        this.StateCode = "";
+        this.CountryCode = "";
     };
 
     _weatherInfo.geoLocator.prototype.getCurrentLocation =
@@ -21,7 +21,7 @@
         function (position) {
             this.location = position;
             this.setAddress();
-            this.setWeather();
+            //this.setWeather();
         };
 
     _weatherInfo.geoLocator.prototype.getCurrentLocationError =
@@ -51,31 +51,35 @@
                         var shortName = addressInfo[i].short_name;
                         switch (addressInfo[i].types[0]) {
                             case "locality":
-                                this.City.val(longName);
+                                this.City = longName;
                                 break;
                             case "administrative_area_level_1":
-                                this.StateCode.val(shortName);
+                                this.StateCode = shortName;
                                 break;
                             case "country":
-                                this.CountryCode.val(shortName);
+                                this.CountryCode = shortName;
                                 break;
                         }
                     }
+                    this.setWeather();
                 }
             }
         };
 
     _weatherInfo.geoLocator.prototype.setWeather =
         function () {
-            weatherHelper = new _weatherInfo.weatherHelper(this.location.coords.latitude, this.location.coords.longitude);
+            weatherHelper = new _weatherInfo.weatherHelper(this.location.coords.latitude, this.location.coords.longitude, this.City, this.StateCode, this.CountryCode);
             weatherHelper.getCurrentWeather();
         };
 
-    _weatherInfo.weatherHelper = function (latitude, longitude) {
+    _weatherInfo.weatherHelper = function (latitude, longitude, city, stateCode, countryCode) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.currentTemperature = "";
         this.currentUnitType = "";
+        this.city = city;
+        this.stateCode = stateCode;
+        this.countryCode = countryCode;
     };
 
     _weatherInfo.weatherHelper.prototype.getCurrentWeather =
@@ -99,7 +103,10 @@
                 this.currentTemperature = result.MainItems[0].CurrentTemperature;
                 this.currentUnitType = result.UnitType;
 
-                // TODO: this has to go away
+                // TODO: all this has to go away
+                $("#currentLocationCity").text(this.city);
+                $("#currentLocationState").text(", " + this.stateCode);
+                $("#currentLocationCountry").text(this.countryCode);
                 $("#currentLocationTemperature").text(this.currentTemperature);
                 $("#currentLocationUnitType").text(this.currentUnitType);
             }
