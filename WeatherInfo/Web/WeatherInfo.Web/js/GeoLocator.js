@@ -8,11 +8,13 @@
         this.City = "";
         this.StateCode = "";
         this.CountryCode = "";
+        this.externalSetAddressCallback = null;
     };
 
     _weatherInfo.geoLocator.prototype.getCurrentLocation =
-        function () {
+        function (externalCallback) {
             if (this.hasGeoLocation) {
+                this.externalSetAddressCallback = externalCallback;
                 navigator.geolocation.getCurrentPosition(this.getCurrentLocationSuccess.bind(this), this.getCurrentLocationError.bind(this));
             }
         };
@@ -21,7 +23,6 @@
         function (position) {
             this.location = position;
             this.setAddress();
-            //this.setWeather();
         };
 
     _weatherInfo.geoLocator.prototype.getCurrentLocationError =
@@ -60,6 +61,9 @@
                                 this.CountryCode = shortName;
                                 break;
                         }
+                    }
+                    if (this.externalSetAddressCallback) {
+                        this.externalSetAddressCallback(this);
                     }
                     this.setWeather();
                 }

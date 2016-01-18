@@ -4,34 +4,27 @@
     ViewBag.Title = "Main";
 }
 
+@Scripts.Render("~/js/main/WeatherController.js")
+
 <h2>Locations</h2>
 
-<div>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <span class="badge"><span id="currentLocationTemperature">54</span>&deg; <span id="currentLocationUnitType">F</span></span>
-            Current Location (<span id="currentLocationCity">Here</span><span id="currentLocationState"></span>&nbsp;<span id="currentLocationCountry"></span>)
-        </li>
-    </ul>
-    @foreach (var item in Model.MainItems)
-    {
+<div data-ng-app="weather-main" data-ng-controller="weatherController" data-ng-init="init()">
+    <div>
         <ul class="list-group">
             <li class="list-group-item">
-                <span class="badge">@item.CurrentTemperature&deg; @Model.UnitType</span>
-                @item.CityName
+                <span class="badge"><span id="currentLocationTemperature">54</span>&deg; <span id="currentLocationUnitType">F</span></span>
+                Current Location (<span data-ng-cloak>{{city}}<span id="currentLocationState"></span>&nbsp;<span id="currentLocationCountry"></span></span>)
             </li>
         </ul>
-    }
+        @foreach (var item in Model.MainItems)
+        {
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">@item.CurrentTemperature&deg; @Model.UnitType</span>
+                    @item.CityName
+                </li>
+            </ul>
+        }
+    </div>
+
 </div>
-
-@section scripts {
-    <script language="javascript" type="text/javascript">
-        var geoLocator;
-
-        $(document).ready(function () {
-            geoLocator = new weatherInfo.geoLocator();
-            geoLocator.getCurrentLocation();
-        });
-
-    </script>
-}
