@@ -13,7 +13,7 @@
         <ul class="list-group">
             <li class="list-group-item">
                 <span class="badge"><span id="currentLocationTemperature">54</span>&deg; <span id="currentLocationUnitType">F</span></span>
-                Current Location (<span data-ng-cloak>{{city}}<span id="currentLocationState"></span>&nbsp;<span id="currentLocationCountry"></span></span>)
+                Current Location (<span data-ng-cloak>{{city}}{{state}}&nbsp;{{country}}</span>)
             </li>
         </ul>
         @foreach (var item in Model.MainItems)

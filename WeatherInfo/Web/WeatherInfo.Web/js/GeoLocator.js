@@ -5,9 +5,9 @@
         this.hasGeoLocation = navigator && navigator.geolocation;
         this.location = 0;
         this.errorMessage = "";
-        this.City = "";
-        this.StateCode = "";
-        this.CountryCode = "";
+        this.city = "";
+        this.stateCode = "";
+        this.countryCode = "";
         this.externalSetAddressCallback = null;
     };
 
@@ -52,38 +52,28 @@
                         var shortName = addressInfo[i].short_name;
                         switch (addressInfo[i].types[0]) {
                             case "locality":
-                                this.City = longName;
+                                this.city = longName;
                                 break;
                             case "administrative_area_level_1":
-                                this.StateCode = shortName;
+                                this.stateCode = shortName;
                                 break;
                             case "country":
-                                this.CountryCode = shortName;
+                                this.countryCode = shortName;
                                 break;
                         }
                     }
                     if (this.externalSetAddressCallback) {
                         this.externalSetAddressCallback(this);
                     }
-                    this.setWeather();
                 }
             }
         };
 
-    _weatherInfo.geoLocator.prototype.setWeather =
-        function () {
-            weatherHelper = new _weatherInfo.weatherHelper(this.location.coords.latitude, this.location.coords.longitude, this.City, this.StateCode, this.CountryCode);
-            weatherHelper.getCurrentWeather();
-        };
-
-    _weatherInfo.weatherHelper = function (latitude, longitude, city, stateCode, countryCode) {
+    _weatherInfo.weatherHelper = function (latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.currentTemperature = "";
         this.currentUnitType = "";
-        this.city = city;
-        this.stateCode = stateCode;
-        this.countryCode = countryCode;
     };
 
     _weatherInfo.weatherHelper.prototype.getCurrentWeather =
@@ -108,9 +98,6 @@
                 this.currentUnitType = result.UnitType;
 
                 // TODO: all this has to go away
-                $("#currentLocationCity").text(this.city);
-                $("#currentLocationState").text(", " + this.stateCode);
-                $("#currentLocationCountry").text(this.countryCode);
                 $("#currentLocationTemperature").text(this.currentTemperature);
                 $("#currentLocationUnitType").text(this.currentUnitType);
             }

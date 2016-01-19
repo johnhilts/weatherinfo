@@ -8,7 +8,13 @@
         };
 
         $scope.setLocation = function (geoLocator) {
-            $scope.city = geoLocator.City;
+            $scope.city = geoLocator.city;
+            $scope.state = ", " + geoLocator.stateCode;
+            $scope.country = geoLocator.countryCode;
+
+            weatherHelper = new weatherInfo.weatherHelper(geoLocator.location.coords.latitude, geoLocator.location.coords.longitude);
+            weatherHelper.getCurrentWeather();
+
             $scope.$apply(); // NOTE: this is necessary because assignment occurs as part of async callback
         }
 
