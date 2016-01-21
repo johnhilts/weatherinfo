@@ -1,5 +1,5 @@
 ﻿angular.module("weather-main", [])
-    .controller('weatherController', function ($scope) {
+    .controller('weatherController', function ($scope, locationService) {
         // TODO: get stuff from the server on page-load
 
         // TODO: pass a list of lat/long's from the server
@@ -7,23 +7,35 @@
             $scope.city = "locating ...";
         };
 
-        $scope.setLocation = function (geoLocator) {
-            $scope.city = geoLocator.city;
-            $scope.state = ", " + geoLocator.stateCode;
-            $scope.country = geoLocator.countryCode;
+        $scope.getCurrentLocation = function () {
 
-            weatherHelper = new weatherInfo.weatherHelper(geoLocator.location.coords.latitude, geoLocator.location.coords.longitude);
+            $scope.errorMessages = [];
+
+                locationService.getCurrentLocation()
+                    .then(
+                        function () {
+                            $scope.errorMessages = locationService.errorMessages;
+                            $scope.setLocation(locationService.locationData);
+                        },
+                        function () {
+                            alert("failed");
+                        }
+                    );
+
+        }
+
+        $scope.setLocation = function (locationData) {
+            $scope.city = locationData.city;
+            $scope.state = ", " + locationData.stateCode;
+            $scope.country = locationData.countryCode;
+
+            weatherHelper = new weatherInfo.weatherHelper(locationData.latitude, locationData.longitude);
             weatherHelper.getCurrentWeather();
-
-            $scope.$apply(); // NOTE: this is necessary because assignment occurs as part of async callback
         }
 
         angular.element(document).ready(function () {
             
-            var geoLocator;
-
-            geoLocator = new weatherInfo.geoLocator();
-            geoLocator.getCurrentLocation($scope.setLocation);
+            $scope.getCurrentLocation();
 
         });
     });
