@@ -154,12 +154,12 @@
     <Content Include="js\main\GeoLocationService.js" />
     <Content Include="js\main\LocationService.js" />
     <Content Include="js\main\WeatherController.js" />
+    <Content Include="js\main\WeatherService.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="js\GeoLocator.js" />
     <Content Include="js\WeatherInfo.main.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
