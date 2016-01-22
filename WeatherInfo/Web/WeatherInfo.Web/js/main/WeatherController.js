@@ -11,16 +11,16 @@
 
             $scope.errorMessages = [];
 
-                locationService.getCurrentLocation()
-                    .then(
-                        function () {
-                            $scope.errorMessages = locationService.errorMessages;
-                            $scope.setLocation(locationService.locationData);
-                        },
-                        function () {
-                            alert("failed");
-                        }
-                    );
+            locationService.getCurrentLocation()
+                .then(
+                    function () {
+                        $scope.errorMessages = locationService.errorMessages;
+                        $scope.setLocation(locationService.locationData.pop());
+                    },
+                    function () {
+                        alert("failed");
+                    }
+                );
 
         }
 

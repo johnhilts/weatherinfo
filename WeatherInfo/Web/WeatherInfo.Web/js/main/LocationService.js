@@ -1,28 +1,20 @@
 ﻿var weatherModule = angular.module("weather-main");
 
-weatherModule.factory("locationService", function ($http, $q) {
+weatherModule.factory("locationService", function ($http, $q, geoLocationService) {
 
-    var _locationData = { latitude: 0, longitude: 0, city: '', stateCode: '', countryCode: '', };
+    var _locationData = [];
     var _errorMessages = [];
-
-    function getLocation_Success(geoLocator) {
-        _locationData.latitude = geoLocator.location.coords.latitude;
-        _locationData.longitude = geoLocator.location.coords.longitude;
-        _locationData.city = geoLocator.city;
-        _locationData.stateCode = geoLocator.stateCode;
-        _locationData.countryCode = geoLocator.countryCode;
-    }
 
     var _getCurrentLocation = function () {
         var d = $q.defer();
-        var geoLocator;
-        geoLocator = new weatherInfo.geoLocator();
-        geoLocator.getCurrentLocation(
+
+        geoLocationService.getCurrentLocation(
                 function (g) {
-                    getLocation_Success(g);
+                    _locationData.push(g);
                     d.resolve();
                 }
             );
+
         return d.promise;
     };
 

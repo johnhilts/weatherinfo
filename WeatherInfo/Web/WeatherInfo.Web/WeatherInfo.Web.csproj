@@ -151,6 +151,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="js\main\GeoLocationService.js" />
     <Content Include="js\main\LocationService.js" />
     <Content Include="js\main\WeatherController.js" />
     <Content Include="Scripts\angular-mocks.js" />
