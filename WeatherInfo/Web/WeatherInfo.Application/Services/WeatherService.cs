@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using WeatherInfo.Application.Models.Weather;
-using Location.Weather.OpenWeatherMap.api;
 
 namespace WeatherInfo.Application.Services
 {
@@ -13,10 +12,8 @@ namespace WeatherInfo.Application.Services
         public MainViewModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
         {
 
-            var weatherService = new OpenWeatherMapWeatherService(SettingsService.GetKeyPath());
-            var currentWeather = weatherService.GetCurrentWeatherByLocation(latitude, longitude);
-            currentWeather.UnitType = Location.Weather.UnitType.Fahrenheit;
-            currentWeather.Temperature = currentWeather.Temperature * 9 / 5 - 459.67m;
+            var location = new Location.Location(Settings);
+            var currentWeather = location.GetCurrentWeatherByLocation(latitude, longitude);
 
             var model = new MainViewModel
             {

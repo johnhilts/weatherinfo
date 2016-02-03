@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Module\Infrastructure\Infrastructure.csproj">
+      <Project>{f3838a2d-e8f3-49a9-b434-a78aa60d921b}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Module\Location\Location.csproj">
       <Project>{0569be38-b68e-4c67-b4db-7d43c163d2ab}</Project>
       <Name>Location</Name>
