@@ -6,7 +6,7 @@ namespace WeatherInfo.Web.ApiControllers
     {
         public MainViewModel Get(decimal latitude, decimal longitude)
         {
-            return _weatherService.GetCurrentWeatherByLocation(latitude, longitude);
+            return PresentationService.Weather.GetCurrentWeatherByLocation(latitude, longitude);
         }
 
     }
