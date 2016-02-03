@@ -1,4 +1,4 @@
-﻿namespace WeatherInfo.Web.Models.Weather
+﻿namespace WeatherInfo.Application.Models.Weather
 {
     public class MainItemViewModel
     {

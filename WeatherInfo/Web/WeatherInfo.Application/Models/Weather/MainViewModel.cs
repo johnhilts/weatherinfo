@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WeatherInfo.Web.Models.Weather
+namespace WeatherInfo.Application.Models.Weather
 {
     public class MainViewModel
     {

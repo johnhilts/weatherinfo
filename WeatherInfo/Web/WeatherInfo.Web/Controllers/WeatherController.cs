@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using WeatherInfo.Web.Models.Weather;
+using WeatherInfo.Application.Models.Weather;
 
 namespace WeatherInfo.Web.Controllers
 {
