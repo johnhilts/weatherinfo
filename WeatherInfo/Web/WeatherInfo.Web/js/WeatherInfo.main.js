@@ -11,6 +11,10 @@
             }
         };
 
+    _weatherInfo.hasLocalStorage =
+        function () {
+            return (typeof (Storage) !== "undefined");
+        };
 
     return _weatherInfo;
 }());

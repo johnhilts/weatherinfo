@@ -5,6 +5,8 @@
         // TODO: pass a list of lat/long's from the server
         $scope.init = function () {
             $scope.city = "locating ...";
+            $scope.currentLocationTemperature = "...";
+            $scope.currentLocationUnitType = $scope.getPreviousUnitType("current");
         };
 
         $scope.getCurrentLocation = function () {
@@ -53,6 +55,25 @@
         $scope.setWeather = function (weatherData) {
             $scope.currentLocationTemperature = weatherData.currentTemperature;
             $scope.currentLocationUnitType = weatherData.currentUnitType;
+            $scope.setPreviousUnitType("current", weatherData.currentUnitType);
+        }
+
+        $scope.getPreviousUnitType = function (key) {
+
+            if (!weatherInfo.hasLocalStorage()) {
+                return '';
+            }
+
+            return localStorage.getItem(key);
+        }
+
+        $scope.setPreviousUnitType = function (key, unitType) {
+
+            if (!weatherInfo.hasLocalStorage()) {
+                return;
+            }
+
+            localStorage.setItem(key, unitType);
         }
 
         angular.element(document).ready(function () {
