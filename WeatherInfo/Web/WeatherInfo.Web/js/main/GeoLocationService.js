@@ -73,8 +73,42 @@ weatherModule.factory("geoLocationService", function ($http, $q) {
         }
     };
 
+    // NOTE: this method has a dependency on Google maps api
+    // TODO: make this more int'l friendly
+    var _searchLocation = function (address, externalSetAddressCallback) {
+        var d = $q.defer();
+
+        if (_hasGeoLocation) {
+            var geocoder = new google.maps.Geocoder();
+            _externalSetAddressCallback = externalSetAddressCallback;
+            geocoder.geocode({ 'address': address },
+                function (results, status) {
+                    _setLocationByAddressCallback(results, status);
+                    d.resolve();
+                }
+                ,
+                _getCurrentLocationError);
+        }
+
+        return d.promise;
+    };
+
+    var _setLocationByAddressCallback =
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        _locationData.latitude = results[0].geometry.location.lat();
+                        _locationData.longitude = results[0].geometry.location.lng();
+                        if (_externalSetAddressCallback) {
+                            _externalSetAddressCallback(_locationData);
+                        }
+                    }
+                }
+            };
+
     return {
         getCurrentLocation: _getCurrentLocation,
+        searchLocation: _searchLocation,
         errorMessages: _errorMessages,
     };
 

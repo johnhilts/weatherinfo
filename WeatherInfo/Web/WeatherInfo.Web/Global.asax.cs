@@ -19,5 +19,10 @@ namespace WeatherInfo.Web
 
             Mapper.Initialize(x => x.AddProfile<MapProfile>());
         }
+
+        private void InitializeInfrastructure()
+        {
+
+        }
     }
 }

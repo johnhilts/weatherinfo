@@ -18,9 +18,23 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
         return d.promise;
     };
 
+    var _searchLocation = function (address) {
+        var d = $q.defer();
+
+        geoLocationService.searchLocation(address, 
+                function (g) {
+                    _locationData.push(g);
+                    d.resolve();
+                }
+            );
+
+        return d.promise;
+    };
+
     return {
         locationData: _locationData,
         getCurrentLocation: _getCurrentLocation,
+        searchLocation: _searchLocation,
         errorMessages: _errorMessages,
     };
 

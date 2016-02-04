@@ -1,5 +1,4 @@
-﻿angular.module("weather-main", [])
-    .controller('weatherController', function ($scope, locationService, weatherService) {
+﻿weatherInfo.weatherApp.controller('weatherController', function ($scope, locationService, weatherService) {
         // TODO: get stuff from the server on page-load
 
         // TODO: pass a list of lat/long's from the server

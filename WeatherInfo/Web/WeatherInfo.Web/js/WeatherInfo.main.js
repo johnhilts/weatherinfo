@@ -16,5 +16,7 @@
             return (typeof (Storage) !== "undefined");
         };
 
+    _weatherInfo.weatherApp = angular.module("weather-main", ["ui.bootstrap.modal"]);
+
     return _weatherInfo;
 }());

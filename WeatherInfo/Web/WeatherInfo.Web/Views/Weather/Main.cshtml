@@ -4,30 +4,49 @@
     ViewBag.Title = "Main";
 }
 
+<div data-ng-app="weather-main">
+    <div data-ng-controller="locationController" data-ng-init="init()">
+        <h2>
+            Locations &nbsp; &nbsp;
+            <button type="button" class="btn" data-ng-click="showAddLocationForm()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </h2>
+
+        <div modal="showModal" close="modalCancel()">
+            <div class="col-md-3"></div>
+            <add-location class="col-md-6"></add-location>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+    <div data-ng-controller="weatherController" data-ng-init="init()">
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge"><span data-ng-cloak>{{currentLocationTemperature}}</span>&deg; <span data-ng-cloak>{{currentLocationUnitType}}</span></span>
+                    Current Location (<span data-ng-cloak>{{city}}{{state}}&nbsp;{{country}}</span>)
+                </li>
+            </ul>
+            @foreach (var item in Model.MainItems)
+            {
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">@item.CurrentTemperature&deg; @Model.UnitType</span>
+                        @item.CityName
+                    </li>
+                </ul>
+            }
+        </div>
+
+    </div>
+</div>
+
+@section scripts
+{
 @Scripts.Render("~/js/main/WeatherController.js")
+@Scripts.Render("~/js/main/LocationController.js")
 @Scripts.Render("~/js/main/WeatherService.js")
 @Scripts.Render("~/js/main/LocationService.js")
 @Scripts.Render("~/js/main/GeoLocationService.js")
-
-<h2>Locations</h2>
-
-<div data-ng-app="weather-main" data-ng-controller="weatherController" data-ng-init="init()">
-    <div>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <span class="badge"><span data-ng-cloak>{{currentLocationTemperature}}</span>&deg; <span data-ng-cloak>{{currentLocationUnitType}}</span></span>
-                Current Location (<span data-ng-cloak>{{city}}{{state}}&nbsp;{{country}}</span>)
-            </li>
-        </ul>
-        @foreach (var item in Model.MainItems)
-        {
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge">@item.CurrentTemperature&deg; @Model.UnitType</span>
-                    @item.CityName
-                </li>
-            </ul>
-        }
-    </div>
-
-</div>
+}
