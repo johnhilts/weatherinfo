@@ -42,8 +42,8 @@
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
                         var locationData = locationService.locationData.pop();
-                        //$scope.setWeather(weatherData);
                         $scope.setLocation(locationData);
+                        $scope.modalCancel();
                     },
                     function () {
                         alert("location add failed");
