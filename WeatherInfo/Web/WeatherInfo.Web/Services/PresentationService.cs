@@ -36,7 +36,7 @@ namespace WeatherInfo.Web.Services
 
             public MainViewModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
             {
-                var cacheKey = "CurrentLocationTemperature";
+                var cacheKey = string.Format("{0}x{1},", latitude.ToString("F4"), longitude.ToString("F4"));
                 var model = context.Cache[cacheKey] as MainViewModel;
                 if (model == null)
                 {
