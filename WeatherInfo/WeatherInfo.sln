@@ -19,6 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherInfo.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Module\Infrastructure\Infrastructure.csproj", "{F3838A2D-E8F3-49A9-B434-A78AA60D921B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{403FDB5D-583E-46E2-9BAF-E58B7900F364}"
+	ProjectSection(SolutionItems) = preProject
+		UserInfo.create.sql = UserInfo.create.sql
+		UserLocations.create.sql = UserLocations.create.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
