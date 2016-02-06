@@ -1,6 +1,11 @@
-﻿using Infrastructure.Core;
+﻿using System;
+using Infrastructure.Core;
+using Location.Address;
 using Location.Weather;
 using Location.Weather.OpenWeatherMap.api;
+using Data.Repository;
+using AutoMapper;
+using Data.Model;
 
 namespace Location
 {
@@ -25,6 +30,14 @@ namespace Location
             currentWeather.Temperature = currentWeather.Temperature * 9 / 5 - 459.67m;
 
             return currentWeather;
+        }
+
+        public void Add(Address.Address address)
+        {
+            var repo = new LocationRepository(_settings);
+            var dataModel = Mapper.Map<UserLocationDataModel>(address);
+            dataModel.UserId = new Guid("C49200FC-C271-4CC3-8905-086A2CE9AB4E");
+            repo.AddUserLocation(dataModel);
         }
     }
 }

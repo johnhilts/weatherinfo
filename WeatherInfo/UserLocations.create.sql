@@ -7,6 +7,7 @@ go
 set quoted_identifier on
 go
 create table dbo.UserLocations(
+	Id int identity(1, 1) not null,
 	UserId uniqueidentifier not null,
 	GeoLocation geography not null,
 	City nvarchar(50) not null, 
@@ -15,9 +16,12 @@ create table dbo.UserLocations(
 	SortOrder tinyint not null, 
  constraint [pk_UserLocations] primary key clustered 
 (
-	UserId asc
+	id asc
 )with (pad_index = off, statistics_norecompute = off, ignore_dup_key = off, allow_row_locks = on, allow_page_locks = on) on [primary]
 ) on [primary]
+
+create index ix_UserLocations_UserId on dbo.UserLocations(UserId);
+
 go
 
 alter table dbo.UserLocations  with check add  constraint FK_UserLocations_UserInfo foreign key(UserId)

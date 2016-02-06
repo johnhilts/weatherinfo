@@ -10,7 +10,7 @@ namespace WeatherInfo.Application.Services
         public BaseService(SettingsService settingsService)
         {
             SettingsService = settingsService;
-            Settings = new Settings { KeyPath = settingsService.GetKeyPath(), };
+            Settings = new Settings(settingsService.GetKeyPath(), settingsService.GetConfigurationPath());
         }
     }
 }

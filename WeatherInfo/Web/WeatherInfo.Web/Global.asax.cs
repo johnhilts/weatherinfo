@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
-using Location.Map;
+using Application.Map;
 
 namespace WeatherInfo.Web
 {
@@ -17,7 +17,13 @@ namespace WeatherInfo.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            Mapper.Initialize(x => x.AddProfile<MapProfile>());
+            Mapper.Initialize(x =>
+            {
+                x.AddProfile<MapProfile>(); // application
+                x.AddProfile<Location.Map.MapProfile>();
+            });
+
+            //SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
         }
 
     }

@@ -20,7 +20,8 @@ namespace WeatherInfo.Web.Services
         {
             var applicationRootPath = System.Web.Hosting.HostingEnvironment.MapPath("/");
             var keyPath = System.Web.Hosting.HostingEnvironment.MapPath("/env/openWeatherMapKey.txt");
-            _settingsService = new SettingsService(applicationRootPath, keyPath);
+            var configurationPath = System.Web.Hosting.HostingEnvironment.MapPath("/env/WeatherInfoConnectionString.txt");
+            _settingsService = new SettingsService(applicationRootPath, keyPath, configurationPath);
             context = HttpContext.Current;
             Location = new PresentationLocation(context, _settingsService);
             Weather = new PresentationWeather(context, _settingsService);
@@ -39,8 +40,7 @@ namespace WeatherInfo.Web.Services
 
             public dynamic AddLocation(LocationInputModel model)
             {
-
-                if (!string.IsNullOrWhiteSpace(model.City) && !string.IsNullOrWhiteSpace(model.StateCode) && !string.IsNullOrWhiteSpace(model.CountryCode))
+                if (_locationService.AddLocation(model))
                     return new { Success = true, };
                 else
                     return new { Success = false, };
