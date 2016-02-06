@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllers\BaseApiController.cs" />
+    <Compile Include="ApiControllers\LocationController.cs" />
     <Compile Include="ApiControllers\WeatherController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

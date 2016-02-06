@@ -44,6 +44,7 @@
                         var locationData = locationService.locationData.pop();
                         $scope.setLocation(locationData);
                         $scope.modalCancel();
+                        $scope.addLocation(locationData);
                     },
                     function () {
                         alert("location add failed");
@@ -83,6 +84,22 @@
             // TODO: change to locations.push(location) - we will need to make the property names the same
             $scope.locations.push({ city: locationData.city + ", ", state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
         }
+
+        $scope.addLocation = function (locationData) {
+
+            $scope.errorMessages = [];
+
+            locationService.addLocation(locationData)
+                .then(
+                    function () {
+                        $scope.errorMessages = locationService.errorMessages;
+                    },
+                    function () {
+                        alert("location add failed");
+                    }
+                );
+
+        };
 
         /*
         $scope.addLocation = function (locationData) {
