@@ -23,7 +23,8 @@ namespace WeatherInfo.Web
                 x.AddProfile<Location.Map.MapProfile>();
             });
 
-            //SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
+            // NOTE: need this line to load SqlServerTypes on machines where 'System CLR Types for SQL Server' is not installed
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
         }
 
     }
