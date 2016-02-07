@@ -24,7 +24,7 @@ namespace WeatherInfo.Web
             });
 
             // NOTE: need this line to load SqlServerTypes on machines where 'System CLR Types for SQL Server' is not installed
-            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/"));
         }
 
     }
