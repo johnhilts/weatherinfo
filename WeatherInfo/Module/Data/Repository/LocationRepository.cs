@@ -23,8 +23,10 @@ namespace Data.Repository
             var geoFormat = "POINT({0} {1})";
             dataModel.GeoLocation = SqlGeography.STPointFromText(new SqlChars(new SqlString(string.Format(geoFormat, dataModel.Longitude, dataModel.Latitude))), 4326);
             db.Execute(
-                @"insert into dbo.UserLocations(UserId, GeoLocation, City, StateCode, CountryCode, SortOrder) 
-                values (@UserId, @GeoLocation, @City, @StateCode, @CountryCode, @SortOrder)", 
+                @"
+                declare @MaxUserSortOrder tinyint = (select max(SortOrder) from dbo.UserLocations where UserId = @UserId)
+                insert into dbo.UserLocations(UserId, GeoLocation, City, StateCode, CountryCode, SortOrder) 
+                values (@UserId, @GeoLocation, @City, @StateCode, @CountryCode, @MaxUserSortOrder + 1)", 
                 dataModel);
         }
     }
