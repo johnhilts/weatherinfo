@@ -6,6 +6,7 @@ using Location.Weather.OpenWeatherMap.api;
 using Data.Repository;
 using AutoMapper;
 using Data.Model;
+using System.Collections.Generic;
 
 namespace Location
 {
@@ -23,13 +24,18 @@ namespace Location
 
         public WeatherInfoModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
         {
-
             var weatherService = new OpenWeatherMapWeatherService(_settings.KeyPath);
             var currentWeather = weatherService.GetCurrentWeatherByLocation(latitude, longitude);
             currentWeather.UnitType = UnitType.Fahrenheit;
             currentWeather.Temperature = currentWeather.Temperature * 9 / 5 - 459.67m;
 
             return currentWeather;
+        }
+
+        public List<Address.Address> GetLocationsByUserId(Guid userId)
+        {
+            var repo = new LocationRepository(_settings);
+            return Mapper.Map<List<Address.Address>>(repo.GetLocationsByUserId(userId));
         }
 
         public void Add(Address.Address address)
@@ -39,5 +45,6 @@ namespace Location
             dataModel.UserId = new Guid("C49200FC-C271-4CC3-8905-086A2CE9AB4E");
             repo.AddUserLocation(dataModel);
         }
+
     }
 }

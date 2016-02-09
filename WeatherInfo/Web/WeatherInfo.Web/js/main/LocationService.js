@@ -18,6 +18,29 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
         return d.promise;
     };
 
+    var _getLocations = function () {
+        var d = $q.defer();
+
+        $http({
+            method: 'GET',
+            url: '/api/Location',
+            //params: { latitude: latitude, longitude: longitude, },  // pass in data as strings
+        })
+        .then(function (r) { _getLocationsSuccess(r); d.resolve(); }, function () { d.reject(); });
+
+        return d.promise;
+    };
+
+    var _getLocationsSuccess = function (result) {
+            if (result) {
+                var locationData = {
+                    currentTemperature: currentTemperature = result.data.MainItems[0].CurrentTemperature,
+                    currentUnitType: result.data.UnitType,
+                };
+                _weatherData.push(weatherData);
+            }
+        };
+
     var _searchLocation = function (address) {
         var d = $q.defer();
 

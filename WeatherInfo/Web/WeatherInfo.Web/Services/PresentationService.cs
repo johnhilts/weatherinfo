@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Caching;
 using WeatherInfo.Application.Models.Location;
@@ -36,6 +37,11 @@ namespace WeatherInfo.Web.Services
             {
                 this.context = context;
                 _locationService = new LocationService(settingsService);
+            }
+
+            public List<LocationInputModel> GetLocations()
+            {
+                return _locationService.GetLocations();
             }
 
             public dynamic AddLocation(LocationInputModel model)

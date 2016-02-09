@@ -3,6 +3,7 @@ using Data.Model;
 using Location.Weather;
 using Location.Weather.OpenWeatherMap.api;
 using Location.Weather.WorldWeatherOnline.api;
+using System.Collections.Generic;
 
 namespace Location.Map
 {
@@ -20,6 +21,8 @@ namespace Location.Map
                 .ForMember(d => d.Temperature, o => o.MapFrom(source => source.Data.Weather[0].MaxTempF));
 
             CreateMap<Address.Address, UserLocationDataModel>();
+
+            CreateMap<List<UserLocationDataModel>, List<Address.Address>>();
 
         }
     }
