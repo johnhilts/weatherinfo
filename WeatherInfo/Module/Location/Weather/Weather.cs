@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Location.Model;
+using System;
 
 namespace Location.Weather
 {
@@ -8,10 +9,10 @@ namespace Location.Weather
     public class Weather
     {
         private UnitType _unitType;
-        private Address.Address _address;
+        private Address _address;
         private IWeatherService _weatherService;
 
-        public Weather(UnitType unitType, Address.Address address, IWeatherService weatherService)
+        public Weather(UnitType unitType, Address address, IWeatherService weatherService)
         {
             _unitType = unitType;
             _address = address;

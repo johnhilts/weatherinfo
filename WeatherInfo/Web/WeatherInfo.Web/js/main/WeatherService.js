@@ -21,7 +21,7 @@ weatherModule.factory("weatherService", function ($http, $q) {
     var _getGetCurrentWeatherSuccess = function (result) {
             if (result) {
                 var weatherData = {
-                    currentTemperature: currentTemperature = result.data.MainItems[0].CurrentTemperature,
+                    currentTemperature: currentTemperature = result.data.CurrentTemperature,
                     currentUnitType: result.data.UnitType,
                 };
                 _weatherData.push(weatherData);

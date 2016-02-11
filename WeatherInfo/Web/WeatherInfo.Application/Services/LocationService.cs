@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Location.Address;
+using Location.Model;
 using System;
 using System.Collections.Generic;
 using WeatherInfo.Application.Models.Location;

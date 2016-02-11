@@ -1,4 +1,4 @@
-﻿namespace Location.Address
+﻿namespace Location.Model
 {
     public class Address
     {

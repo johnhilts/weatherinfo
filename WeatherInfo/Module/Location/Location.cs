@@ -1,6 +1,6 @@
 ﻿using System;
 using Infrastructure.Core;
-using Location.Address;
+using Location.Model;
 using Location.Weather;
 using Location.Weather.OpenWeatherMap.api;
 using Data.Repository;
@@ -32,13 +32,14 @@ namespace Location
             return currentWeather;
         }
 
-        public List<Address.Address> GetLocationsByUserId(Guid userId)
+        public List<Address> GetLocationsByUserId(Guid userId)
         {
             var repo = new LocationRepository(_settings);
-            return Mapper.Map<List<Address.Address>>(repo.GetLocationsByUserId(userId));
+            var locations = repo.GetLocationsByUserId(userId);
+            return Mapper.Map<List<Address>>(locations);
         }
 
-        public void Add(Address.Address address)
+        public void Add(Address address)
         {
             var repo = new LocationRepository(_settings);
             var dataModel = Mapper.Map<UserLocationDataModel>(address);

@@ -43,8 +43,16 @@ namespace Data.Repository
         {
             using (var db = GetConnection())
             {
-                const string query = "select UserId, GeoLocation, City, StateCode, CountryCode, SortOrder where UserId = @UserId";
-                return db.Query<UserLocationDataModel>(query, new { UserId = userId, }).ToList();
+                const string query = "select UserId, GeoLocation, City, StateCode, CountryCode, SortOrder from dbo.UserLocations (nolock) where UserId = @UserId";
+                var locations = db.Query<UserLocationDataModel>(query, new { UserId = userId, }).ToList();
+                locations.ForEach(x =>
+                    {
+                        x.Latitude = (decimal)x.GeoLocation.Lat.ToSqlDecimal();
+                        x.Longitude = (decimal)x.GeoLocation.Long.ToSqlDecimal();
+                    }
+                );
+
+                return locations;
             }
         }
     }

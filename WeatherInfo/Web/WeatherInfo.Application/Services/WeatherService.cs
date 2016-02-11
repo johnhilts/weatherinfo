@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WeatherInfo.Application.Models.Weather;
+﻿using WeatherInfo.Application.Models.Weather;
 
 namespace WeatherInfo.Application.Services
 {
@@ -9,19 +8,15 @@ namespace WeatherInfo.Application.Services
         {
         }
 
-        public MainViewModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
+        public WeatherModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
         {
 
             var location = new Location.Location(Settings);
             var currentWeather = location.GetCurrentWeatherByLocation(latitude, longitude);
 
-            var model = new MainViewModel
+            var model = new WeatherModel
             {
-                MainItems =
-                    new List<MainItemViewModel>
-                    {
-                        new MainItemViewModel{ CityName="Glendale, CA, USA", CurrentTemperature= decimal.Round(currentWeather.Temperature, 1), },
-                    },
+                CurrentTemperature = decimal.Round(currentWeather.Temperature, 1),
                 UnitType = currentWeather.UnitType.ToString("g").Substring(0, 1).ToUpper(),
             };
 

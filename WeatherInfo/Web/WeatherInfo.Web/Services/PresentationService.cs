@@ -64,10 +64,10 @@ namespace WeatherInfo.Web.Services
                 _weatherService = new WeatherService(settingsService);
             }
 
-            public MainViewModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
+            public WeatherModel GetCurrentWeatherByLocation(decimal latitude, decimal longitude)
             {
                 var cacheKey = string.Format("{0}x{1},", latitude.ToString("F4"), longitude.ToString("F4"));
-                var model = context.Cache[cacheKey] as MainViewModel;
+                var model = context.Cache[cacheKey] as WeatherModel;
                 if (model == null)
                 {
                     model = _weatherService.GetCurrentWeatherByLocation(latitude, longitude);

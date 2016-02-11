@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Moq;
 
-using Location.Address;
+using Location.Model;
 using Location.Weather;
 
 namespace LocationTests.Unit

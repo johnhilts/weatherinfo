@@ -37,8 +37,8 @@
             {
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <span class="badge">@item.CurrentTemperature&deg; @Model.UnitType</span>
-                        @item.CityName
+                        <span class="badge">{{currentLocationTemperature}}&deg; @Model.UnitType</span>
+                        @item.City@item.StateCode @item.CountryCode
                     </li>
                 </ul>
             }

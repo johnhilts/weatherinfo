@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Data.Model;
+using Location.Model;
 using Location.Weather;
 using Location.Weather.OpenWeatherMap.api;
 using Location.Weather.WorldWeatherOnline.api;
@@ -20,9 +21,16 @@ namespace Location.Map
             CreateMap<HistoricalWeatherDataModel, WeatherInfoModel>()
                 .ForMember(d => d.Temperature, o => o.MapFrom(source => source.Data.Weather[0].MaxTempF));
 
-            CreateMap<Address.Address, UserLocationDataModel>();
+            CreateMap<Address, UserLocationDataModel>();
 
-            CreateMap<List<UserLocationDataModel>, List<Address.Address>>();
+            CreateMap<UserLocationDataModel, Address>()
+                //.ForMember(d=>d.Latitude, o=>o.MapFrom(source=>source.GeoLocation.Lat))
+                //.ForMember(d=>d.Longitude, o=>o.MapFrom(source=>source.GeoLocation.Long))
+                //.Ignore(s => s.GeoLocation)
+                .ForSourceMember(x => x.GeoLocation, y => y.Ignore())
+                ;
+
+            CreateMap<List<UserLocationDataModel>, List<Address>>();
 
         }
     }
