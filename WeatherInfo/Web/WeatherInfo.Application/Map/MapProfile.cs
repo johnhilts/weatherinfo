@@ -11,7 +11,7 @@ namespace Application.Map
         {
             CreateMap<LocationInputModel, Address>();
 
-            CreateMap<List<Address>, List<LocationInputModel>>();
+            CreateMap<Address, LocationInputModel>();
 
         }
     }

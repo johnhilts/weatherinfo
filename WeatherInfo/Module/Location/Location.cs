@@ -35,8 +35,7 @@ namespace Location
         public List<Address> GetLocationsByUserId(Guid userId)
         {
             var repo = new LocationRepository(_settings);
-            var locations = repo.GetLocationsByUserId(userId);
-            return Mapper.Map<List<Address>>(locations);
+            return Mapper.Map<List<Address>>(repo.GetLocationsByUserId(userId));
         }
 
         public void Add(Address address)
