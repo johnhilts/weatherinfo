@@ -33,11 +33,11 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
 
     var _getLocationsSuccess = function (result) {
             if (result) {
-                var locationData = {
-                    currentTemperature: currentTemperature = result.data.MainItems[0].CurrentTemperature,
-                    currentUnitType: result.data.UnitType,
-                };
-                _weatherData.push(weatherData);
+                //var locationData = {
+                //    currentTemperature: currentTemperature = result.data.MainItems[0].CurrentTemperature,
+                //    currentUnitType: result.data.UnitType,
+                //};
+                _locationData.push(result.data);
             }
         };
 
@@ -81,6 +81,7 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
     return {
         locationData: _locationData,
         getCurrentLocation: _getCurrentLocation,
+        getLocations: _getLocations,
         addLocation: _addLocation,
         searchLocation: _searchLocation,
         errorMessages: _errorMessages,

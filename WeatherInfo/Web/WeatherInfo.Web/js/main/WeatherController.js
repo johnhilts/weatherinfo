@@ -39,6 +39,10 @@
 
             $scope.errorMessages = [];
 
+            if (!locationData.latitude || !locationData.longitude) {
+                return;
+            }
+
             weatherService.getCurrentWeather(locationData.latitude, locationData.longitude)
                 .then(
                     function () {
@@ -67,7 +71,13 @@
                 return '';
             }
 
-            return localStorage.getItem(key);
+            var previousUnitType = localStorage.getItem(key);
+            if (previousUnitType && previousUnitType !== "undefined") {
+                return previousUnitType;
+            }
+            else {
+                return '';
+            }
         }
 
         $scope.setPreviousUnitType = function (key, unitType) {
@@ -82,6 +92,7 @@
         angular.element(document).ready(function () {
 
             $scope.getCurrentLocation($scope.getCurrentWeather);
+            $scope.getLocations();
 
         });
     });

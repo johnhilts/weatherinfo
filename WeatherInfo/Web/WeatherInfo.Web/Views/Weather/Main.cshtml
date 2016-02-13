@@ -27,21 +27,23 @@
                     Current Location (<span data-ng-cloak>{{city}}{{state}}&nbsp;{{country}}</span>)
                 </li>
             </ul>
-            <ul class="list-group" data-ng-repeat="location in locations" data-ng-cloak>
+            <ul class="list-group" data-ng-repeat="locationData in locations" data-ng-cloak data-ng-show="isNgReady">
                 <li class="list-group-item">
-                    <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{location.latitude}}" longitude="{{location.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>
-                    <span data-ng-cloak>{{location.city}}{{location.state}}&nbsp;{{location.country}}</span>
+                    <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{locationData.latitude}}" longitude="{{locationData.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>
+                    <span data-ng-cloak>{{locationData.city}}{{locationData.state}}&nbsp;{{locationData.country}}</span>
                 </li>
             </ul>
+            <div data-ng-show="!isNgReady">
             @foreach (var item in Model.MainItems)
             {
                 <ul class="list-group">
                     <li class="list-group-item">
                         <span class="badge">{{currentLocationTemperature}}&deg; @Model.UnitType</span>
-                        @item.City@item.StateCode @item.CountryCode
+                        @item.City@item.StateCode @item.CountryCode - Server
                     </li>
                 </ul>
             }
+            </div>
         </div>
 
     </div>

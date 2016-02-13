@@ -15,6 +15,8 @@
 
             $scope.locations = [];
             //$scope.locations.push({ city: 'Burbank, ', state: 'CA', country: 'US', temperature: 69.1, unitType: 'F', });
+
+            $scope.isNgReady = false;
         };
 
         $scope.modalOpen = function () {
@@ -78,6 +80,35 @@
             $scope.city = locationData.city;
             $scope.state = ", " + locationData.stateCode;
             $scope.country = locationData.countryCode;
+        }
+
+        $scope.getLocations = function (successCallback) {
+
+            $scope.errorMessages = [];
+
+            locationService.getLocations()
+                .then(
+                    function () {
+                        $scope.errorMessages = locationService.errorMessages;
+                        var locationDataList = locationService.locationData.pop();
+                        for (i = 0; i < locationDataList.length; i++) {
+                            $scope.setLocations(locationDataList[i]);
+                        }
+                        $scope.isNgReady = true;
+                        if (successCallback) {
+                            successCallback(locationDataList);
+                        }
+                    },
+                    function () {
+                        alert("location failed");
+                    }
+                );
+
+        }
+
+        $scope.setLocations = function (locationData) { // HACK
+            // TODO: change to locations.push(location) - we will need to make the property names the same
+            $scope.locations.push({ city: locationData.City + ", ", state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, });
         }
 
         $scope.setLocation = function (locationData) {
