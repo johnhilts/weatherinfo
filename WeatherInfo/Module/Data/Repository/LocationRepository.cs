@@ -26,6 +26,7 @@ namespace Data.Repository
 
         public void AddUserLocation(UserLocationDataModel dataModel)
         {
+            if (dataModel.StateCode.Length > 2) dataModel.StateCode = string.Empty;
             var geoFormat = "POINT({0} {1})";
             dataModel.GeoLocation = SqlGeography.STPointFromText(new SqlChars(new SqlString(string.Format(geoFormat, dataModel.Longitude, dataModel.Latitude))), 4326);
             using (var db = GetConnection())
