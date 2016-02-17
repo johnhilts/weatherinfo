@@ -6,7 +6,7 @@ weatherModule.factory("geoLocationService", function ($http, $q) {
     var _errorMessage = "";
     var _externalSetAddressCallback = null;
 
-    var _locationData = { latitude: 0, longitude: 0, city: '', stateCode: '', countryCode: '', };
+    var _locationData = { latitude: 0, longitude: 0, city: '', stateCode: '', countryCode: '', inputName: '', };
     var _errorMessages = [];
 
     var _getCurrentLocation = function (externalSetAddressCallback) {
@@ -82,6 +82,7 @@ weatherModule.factory("geoLocationService", function ($http, $q) {
         var d = $q.defer();
 
         if (_hasGeoLocation) {
+            _locationData.inputName = address;
             var geocoder = new google.maps.Geocoder();
             _externalSetAddressCallback = externalSetAddressCallback;
             geocoder.geocode({ 'address': address },

@@ -77,8 +77,9 @@
         }
 
         $scope.setCurrentLocation = function (locationData) {
+            $scope.inputName = locationData.inputName;
             $scope.city = locationData.city;
-            $scope.state = ", " + locationData.stateCode;
+            $scope.state = locationData.stateCode;
             $scope.country = locationData.countryCode;
         }
 
@@ -108,12 +109,12 @@
 
         $scope.setLocations = function (locationData) { // HACK
             // TODO: change to locations.push(location) - we will need to make the property names the same
-            $scope.locations.push({ city: locationData.City + ", ", state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, });
+            $scope.locations.push({ inputName: locationData.InputName, city: locationData.City, state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, });
         }
 
         $scope.setLocation = function (locationData) {
             // TODO: change to locations.push(location) - we will need to make the property names the same
-            $scope.locations.push({ city: locationData.city + ", ", state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
+            $scope.locations.push({ inputName: locationData.inputName, city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
         }
 
         $scope.addLocation = function (locationData) {

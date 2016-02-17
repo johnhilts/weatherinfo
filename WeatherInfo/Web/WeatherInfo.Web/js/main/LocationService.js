@@ -59,7 +59,7 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
         $http({
             method: 'POST',
             url: '/api/Location',
-            data: $.param({ City: locationData.city + ", ", StateCode: locationData.stateCode, CountryCode: locationData.countryCode, Latitude: locationData.latitude, Longitude: locationData.longitude, }),  // pass in data as strings
+            data: $.param({ InputName: locationData.inputName, City: locationData.city, StateCode: locationData.stateCode, CountryCode: locationData.countryCode, Latitude: locationData.latitude, Longitude: locationData.longitude, }),  // pass in data as strings
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
         })
         .then(

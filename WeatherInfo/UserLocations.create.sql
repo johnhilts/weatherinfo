@@ -10,6 +10,7 @@ create table dbo.UserLocations(
 	Id int identity(1, 1) not null,
 	UserId uniqueidentifier not null,
 	GeoLocation geography not null,
+	InputName nvarchar(50) not null, 
 	City nvarchar(50) not null, 
 	StateCode varchar(2) not null, 
 	CountryCode varchar(2) not null, 

@@ -24,13 +24,13 @@
             <ul class="list-group">
                 <li class="list-group-item">
                     <span class="badge"><span data-ng-cloak>{{currentLocationTemperature}}</span>&deg; <span data-ng-cloak>{{currentLocationUnitType}}</span></span>
-                    Current Location (<span data-ng-cloak>{{city}}{{state}}&nbsp;{{country}}</span>)
+                    Current Location <span data-ng-cloak>{{locationData.inputName}} ({{city}}, {{state}}&nbsp;{{country}}</span>)
                 </li>
             </ul>
             <ul class="list-group" data-ng-repeat="locationData in locations" data-ng-cloak data-ng-show="isNgReady">
                 <li class="list-group-item">
                     <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{locationData.latitude}}" longitude="{{locationData.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>
-                    <span data-ng-cloak>{{locationData.city}}{{locationData.state}}&nbsp;{{locationData.country}}</span>
+                    <span data-ng-cloak>{{locationData.inputName}} ({{locationData.city}}), {{locationData.state}}&nbsp;{{locationData.country}}</span>
                 </li>
             </ul>
             <div data-ng-show="!isNgReady">
