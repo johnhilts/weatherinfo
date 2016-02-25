@@ -1,12 +1,10 @@
 ﻿using System;
-using Microsoft.SqlServer.Types;
 
 namespace Data.Model
 {
     public class UserLocationDataModel
     {
         public Guid UserId { get; set; }
-        public SqlGeography GeoLocation { get; set; } 
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
         public string InputName { get; set; }

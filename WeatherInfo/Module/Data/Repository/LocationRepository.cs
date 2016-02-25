@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Data.Model;
 using Infrastructure.Core;
-using Microsoft.SqlServer.Types;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -27,15 +26,13 @@ namespace Data.Repository
         public void AddUserLocation(UserLocationDataModel dataModel)
         {
             if (dataModel.StateCode.Length > 2) dataModel.StateCode = string.Empty;
-            var geoFormat = "POINT({0} {1})";
-            dataModel.GeoLocation = SqlGeography.STPointFromText(new SqlChars(new SqlString(string.Format(geoFormat, dataModel.Longitude, dataModel.Latitude))), 4326);
             using (var db = GetConnection())
             {
                 db.Execute(
                     @"
                 declare @MaxUserSortOrder tinyint = isnull((select max(SortOrder) from dbo.UserLocations where UserId = @UserId), 0)
-                insert into dbo.UserLocations(UserId, GeoLocation, InputName, City, StateCode, CountryCode, SortOrder) 
-                values (@UserId, @GeoLocation, @InputName, @City, @StateCode, @CountryCode, @MaxUserSortOrder + 1)",
+                insert into dbo.UserLocations(UserId, Latitude, Longitude, InputName, City, StateCode, CountryCode, SortOrder) 
+                values (@UserId, @Latitude, @Longitude, @InputName, @City, @StateCode, @CountryCode, @MaxUserSortOrder + 1)",
                     dataModel);
             }
         }
@@ -44,14 +41,8 @@ namespace Data.Repository
         {
             using (var db = GetConnection())
             {
-                const string query = "select UserId, GeoLocation, InputName, City, StateCode, CountryCode, SortOrder from dbo.UserLocations (nolock) where UserId = @UserId";
+                const string query = "select UserId, Latitude, Longitude, InputName, City, StateCode, CountryCode, SortOrder from dbo.UserLocations (nolock) where UserId = @UserId";
                 var locations = db.Query<UserLocationDataModel>(query, new { UserId = userId, }).ToList();
-                locations.ForEach(x =>
-                    {
-                        x.Latitude = (decimal)x.GeoLocation.Lat.ToSqlDecimal();
-                        x.Longitude = (decimal)x.GeoLocation.Long.ToSqlDecimal();
-                    }
-                );
 
                 return locations;
             }
