@@ -9,8 +9,8 @@ go
 create table dbo.UserLocations(
 	Id int identity(1, 1) not null,
 	UserId uniqueidentifier not null,
-	Latitude decimal not null,
-	Longitude decimal not null,
+	Latitude decimal(18,14) not null,
+	Longitude decimal(18,14) not null,
 	InputName nvarchar(50) not null, 
 	City nvarchar(50) not null, 
 	StateCode varchar(2) not null, 
