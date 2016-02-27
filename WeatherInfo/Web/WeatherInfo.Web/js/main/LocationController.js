@@ -6,7 +6,7 @@
         };
     })
 
-    .controller('locationController', function ($scope, locationService, weatherService) {
+    .controller('locationController', function ($scope, $interval, locationService, weatherService) {
 
         $scope.init = function () {
             $scope.showModal = false;
@@ -128,6 +128,7 @@
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
                         $scope.addSuccess = locationService.response.success;
+                        $interval($scope.addLocationAlertReset, 2000, 1);
                     },
                     function () {
                         $scope.addFail = !locationService.response.success;
