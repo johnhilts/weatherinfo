@@ -17,6 +17,8 @@
             //$scope.locations.push({ city: 'Burbank, ', state: 'CA', country: 'US', temperature: 69.1, unitType: 'F', });
 
             $scope.isNgReady = false;
+            $scope.addSuccess = false;
+            $scope.addFail = false;
         };
 
         $scope.modalOpen = function () {
@@ -125,13 +127,19 @@
                 .then(
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
+                        $scope.addSuccess = locationService.response.success;
                     },
                     function () {
-                        alert("location add failed");
+                        $scope.addFail = !locationService.response.success;
                     }
                 );
 
         };
+
+        $scope.addLocationAlertReset = function () {
+            $scope.addSuccess = false;
+            $scope.addFail = false;
+        }
 
         /*
         $scope.addLocation = function (locationData) {

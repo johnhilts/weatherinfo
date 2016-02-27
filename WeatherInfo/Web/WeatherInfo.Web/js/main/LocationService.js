@@ -4,6 +4,7 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
 
     var _locationData = [];
     var _errorMessages = [];
+    var _response = { success: false, };
 
     var _getCurrentLocation = function () {
         var d = $q.defer();
@@ -66,20 +67,24 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
             function (r) {
                 if (r.data.Success) {
                     _errorMessages.length = 0;
-                    alert("add success");
+                    _response.success = true;
                 }
                 else {
                     r.data.ErrorMessages.forEach(function (x) { _errorMessages.push(x); });
-                    alert("add fail");
+                    _response.success = false;
                 }
                  d.resolve();
             },
-            function () { d.reject(); });
+            function () {
+                _response.success = false;
+                d.reject();
+            });
         return d.promise;
     };
 
     return {
         locationData: _locationData,
+        response: _response,
         getCurrentLocation: _getCurrentLocation,
         getLocations: _getLocations,
         addLocation: _addLocation,

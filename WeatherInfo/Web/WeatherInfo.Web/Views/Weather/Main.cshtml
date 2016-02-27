@@ -18,6 +18,16 @@
             <div class="col-md-3"></div>
         </div>
 
+    <div class="alert alert-success" role="alert" data-ng-show="addSuccess" data-ng-cloak>
+        <button type="button" class="close" aria-label="Close" data-ng-click="addLocationAlertReset()"><span aria-hidden="true">&times;</span></button>
+        Location saved.
+    </div>
+
+    <div class="alert alert-danger" role="alert" data-ng-show="addFail" data-ng-cloak>
+        <button type="button" class="close" aria-label="Close" data-ng-click="addLocationAlertReset()"><span aria-hidden="true">&times;</span></button>
+        Location save failed.
+    </div>
+
     <div data-ng-controller="weatherController" data-ng-init="init()">
         <input type="hidden" data-ng-model="unitType" />
         <div>
