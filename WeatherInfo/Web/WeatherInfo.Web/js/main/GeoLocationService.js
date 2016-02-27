@@ -108,10 +108,7 @@ weatherModule.factory("geoLocationService", function ($http, $q) {
                     if (results[0]) {
                         _locationData.latitude = results[0].geometry.location.lat();
                         _locationData.longitude = results[0].geometry.location.lng();
-                        setAddressFields(results[0].address_components);
-                        if (_externalSetAddressCallback) {
-                            _externalSetAddressCallback(_locationData);
-                        }
+                        _setAddress();
                     }
                 }
             };
