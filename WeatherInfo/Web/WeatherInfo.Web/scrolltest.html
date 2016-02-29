@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather</title>
+<link href="/Content/site.css" rel="stylesheet"></link>
+<link href="/Content/bootstrap.min.css" rel="stylesheet"></link>
+<script src="/scripts/modernizr-2.6.2.js"></script>
+<script src="/scripts/angular.min.js"></script>
+<script src="/scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/weather/main">Weather</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+    <script>
+        var scrollTestApp = angular.module("scroll-test", []);
+        scrollTestApp
+            .controller('scrollTestController', function ($scope) {
+
+                $scope.init = function () {
+                    $scope.numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+                    $scope.hasMoreData = true;
+                    $scope.offset = 20;
+                    $scope.index = 16;
+                };
+
+                $scope.loadNumbers = function () {
+                    $scope.startFeedback();
+                    for (var i = $scope.index; i < $scope.index + $scope.offset; i++) {
+                        $scope.numbers.push(i);
+                    }
+                    $scope.index = i; // NOTE: i's scope isn't limited to the for loop; JS *bad* part
+                    $scope.endFeedback();
+                    $scope.hasMoreData = $scope.index < 100;
+                    $scope.$apply();
+                };
+
+                $scope.startFeedback =
+                    function () {
+                        $("span#loading").text("Loading ...");
+                    };
+
+                $scope.endFeedback =
+                    function () {
+                        $("span#loading").text("");
+                    };
+
+                angular.element(document).ready(function () {
+                    $(window).scroll(function () {
+                        if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                            if ($scope.hasMoreData) {
+                                $scope.loadNumbers();
+                            }
+                        }
+                    });
+                });
+
+            });
+    </script> 
+<div class="container body-content col-lg-12">
+    <div data-ng-app="scroll-test">
+        <div data-ng-controller="scrollTestController" data-ng-init="init()">
+            <br />
+            <ul data-ng-repeat="number in numbers">
+                <li>
+                    {{number}}
+                </li>
+            </ul>
+            <span id="loading"></span>
+            <button data-ng-click="loadNumbers()" class="btn btn-xs btn-info" style="margin-left:auto; margin-right:auto;" data-ng-cloak data-ng-show="hasMoreData">more</button>
+        </div>
+    </div>
+	<hr />
+	<footer>
+		<p>&copy; 2016 - Weather</p>
+	</footer>
+</div>
+
+<script src="/scripts/bootstrap.min.js"></script>
+<script src="/Scripts/angular-ui/angular-ui-bootstrap-modal.js"></script>
+</body>
+</html>
