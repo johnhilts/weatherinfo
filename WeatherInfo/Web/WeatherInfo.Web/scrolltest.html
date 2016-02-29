@@ -65,6 +65,11 @@
                         $scope.isLoading = false;
                     };
 
+                $scope.isIos =
+                    function () {
+                        return (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false);
+                    };
+
                 angular.element(document).ready(function () {
                     $(window).scroll(function () {
                         if ($(window).scrollTop() + $(window).height() == $(document).height()) {
@@ -87,6 +92,7 @@
                 </li>
             </ul>
             <span data-ng-show="isLoading">loading...</span>
+            <span data-ng-show="isIos() && !isLoading">Pull up to get more data</span>
         </div>
     </div>
 	<hr />
