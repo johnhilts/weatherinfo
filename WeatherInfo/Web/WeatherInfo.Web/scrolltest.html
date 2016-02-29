@@ -30,40 +30,45 @@
     <script>
         var scrollTestApp = angular.module("scroll-test", []);
         scrollTestApp
-            .controller('scrollTestController', function ($scope) {
+            .controller('scrollTestController', function ($scope, $timeout) {
 
                 $scope.init = function () {
                     $scope.numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-                    $scope.hasMoreData = true;
                     $scope.offset = 20;
                     $scope.index = 16;
+                    $scope.max = 100;
+                    $scope.hasMoreData = function () { return $scope.index < $scope.max; };
+                    $scope.isLoading = false;
                 };
 
                 $scope.loadNumbers = function () {
                     $scope.startFeedback();
-                    for (var i = $scope.index; i < $scope.index + $scope.offset; i++) {
+                    $timeout($scope.getMoreData, 1000);
+                };
+
+                $scope.getMoreData = function (i) {
+                    for (var i = $scope.index; i < $scope.index + $scope.offset && i <= $scope.max; i++) {
                         $scope.numbers.push(i);
                     }
                     $scope.index = i; // NOTE: i's scope isn't limited to the for loop; JS *bad* part
                     $scope.endFeedback();
-                    $scope.hasMoreData = $scope.index < 100;
-                    $scope.$apply();
                 };
 
                 $scope.startFeedback =
                     function () {
-                        $("span#loading").text("Loading ...");
+                        $scope.isLoading = true;
+                        $scope.$apply();
                     };
 
                 $scope.endFeedback =
                     function () {
-                        $("span#loading").text("");
+                        $scope.isLoading = false;
                     };
 
                 angular.element(document).ready(function () {
                     $(window).scroll(function () {
                         if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                            if ($scope.hasMoreData) {
+                            if ($scope.hasMoreData()) {
                                 $scope.loadNumbers();
                             }
                         }
@@ -78,11 +83,10 @@
             <br />
             <ul data-ng-repeat="number in numbers">
                 <li>
-                    {{number}}
+                    <h1>{{number}}</h1>
                 </li>
             </ul>
-            <span id="loading"></span>
-            <button data-ng-click="loadNumbers()" class="btn btn-xs btn-info" style="margin-left:auto; margin-right:auto;" data-ng-cloak data-ng-show="hasMoreData">more</button>
+            <span data-ng-show="isLoading">loading...</span>
         </div>
     </div>
 	<hr />
