@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather</title>
+<link href="/Content/site.css" rel="stylesheet"></link>
+<link href="/Content/bootstrap.min.css" rel="stylesheet"></link>
+<script src="/scripts/modernizr-2.6.2.js"></script>
+<script src="/scripts/angular.min.js"></script>
+<script src="/scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/weather/main">Weather</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="container body-content col-lg-12">
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                1.
+                <details>
+                    <summary>Los Angeles</summary>
+                    Warm and Sunny, even though it's the very beginning of March
+                </details>
+            </li>
+            <li class="list-group-item">
+                2.
+                <details onclick="alert('hi');">
+                    <summary>Las Vegas</summary>
+                    Also warm-ish and Sunny
+                </details>
+            </li>
+            <li class="list-group-item">
+                3.
+                <details>
+                    <summary>Back East</summary>
+                    Cold and snowy
+                </details>
+            </li>
+        </ul>
+    </div>
+	<hr />
+	<footer>
+		<p>&copy; 2016 - Weather</p>
+	</footer>
+</div>
+
+<script src="/scripts/bootstrap.min.js"></script>
+<script src="/Scripts/angular-ui/angular-ui-bootstrap-modal.js"></script>
+</body>
+</html>

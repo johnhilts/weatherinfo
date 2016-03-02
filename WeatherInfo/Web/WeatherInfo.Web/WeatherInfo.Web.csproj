@@ -158,6 +158,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="html5test.html" />
     <Content Include="js\main\GeoLocationService.js" />
     <Content Include="js\main\LocationController.js" />
     <Content Include="js\main\LocationService.js" />
