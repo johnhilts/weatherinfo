@@ -34,6 +34,7 @@
         };
 
         $scope.showAddLocationForm = function () {
+            $scope.addLocationAlertReset();
             $scope.modalOpen();
         };
 
