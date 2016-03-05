@@ -21,6 +21,7 @@
 
             $scope.indexes = { currentPageIndex: 0, previousSortIndex: -1, };
             $scope.showGetMore = false;
+            $scope.isLoading = false;
         };
 
         $scope.modalOpen = function () {
@@ -90,6 +91,8 @@
 
         $scope.getLocations = function (successCallback) {
 
+            $scope.startFeedback();
+
             $scope.errorMessages = [];
 
             locationService.getLocations($scope.indexes.currentPageIndex, $scope.indexes.previousSortIndex)
@@ -104,9 +107,11 @@
                             successCallback(locationDataList);
                         }
                         $scope.indexes.currentPageIndex++;
+                        $scope.endFeedback();
                     },
                     function () {
                         alert("location failed");
+                        $scope.endFeedback();
                     }
                 );
 
@@ -147,6 +152,23 @@
             $scope.addSuccess = false;
             $scope.addFail = false;
         }
+
+        $scope.startFeedback =
+            function () {
+                $scope.isLoading = true;
+                //$scope.$apply();
+            };
+
+        $scope.endFeedback =
+            function () {
+                $scope.isLoading = false;
+            };
+
+        // TODO: the logic for this needs to go into main JS
+        $scope.isIos =
+            function () {
+                return (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false);
+            };
 
         /*
         $scope.addLocation = function (locationData) {
