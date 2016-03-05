@@ -5,9 +5,9 @@ namespace WeatherInfo.Web.ApiControllers
 {
     public class LocationController : BaseApiController
     {
-        public List<LocationInputModel> Get()
+        public List<LocationInputModel> Get(int? currentPageIndex)
         {
-            return PresentationService.Location.GetLocations();
+            return PresentationService.Location.GetLocations(currentPageIndex.GetValueOrDefault());
         }
 
         public dynamic Post(LocationInputModel model)

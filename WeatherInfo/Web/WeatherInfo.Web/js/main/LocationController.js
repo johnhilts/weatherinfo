@@ -16,7 +16,6 @@
             $scope.locations = [];
             //$scope.locations.push({ city: 'Burbank, ', state: 'CA', country: 'US', temperature: 69.1, unitType: 'F', });
 
-            $scope.isNgReady = false;
             $scope.addSuccess = false;
             $scope.addFail = false;
         };
@@ -90,7 +89,7 @@
 
             $scope.errorMessages = [];
 
-            locationService.getLocations()
+            locationService.getLocations(0)
                 .then(
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
@@ -98,7 +97,6 @@
                         for (i = 0; i < locationDataList.length; i++) {
                             $scope.setLocations(locationDataList[i]);
                         }
-                        $scope.isNgReady = true;
                         if (successCallback) {
                             successCallback(locationDataList);
                         }
@@ -117,7 +115,7 @@
 
         $scope.setLocation = function (locationData) {
             // TODO: change to locations.push(location) - we will need to make the property names the same
-            $scope.locations.push({ inputName: locationData.inputName, city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
+            $scope.locations.splice(0, 0, { inputName: locationData.inputName, city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
         }
 
         $scope.addLocation = function (locationData) {

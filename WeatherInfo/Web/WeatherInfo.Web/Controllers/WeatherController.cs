@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using WeatherInfo.Application.Models.Weather;
 
 namespace WeatherInfo.Web.Controllers
 {
@@ -7,13 +6,7 @@ namespace WeatherInfo.Web.Controllers
     {
         public ActionResult Main()
         {
-            var model = new MainViewModel
-            {
-                MainItems = PresentationService.Location.GetLocations(),
-                UnitType = "F",
-            };
-
-            return View(model);
+            return View();
         }
 
     }

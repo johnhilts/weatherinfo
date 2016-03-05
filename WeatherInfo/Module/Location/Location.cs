@@ -32,10 +32,10 @@ namespace Location
             return currentWeather;
         }
 
-        public List<Address> GetLocationsByUserId(Guid userId)
+        public List<Address> GetLocationsByUserId(Guid userId, int currentPageIndex)
         {
             var repo = new LocationRepository(_settings);
-            return Mapper.Map<List<Address>>(repo.GetLocationsByUserId(userId));
+            return Mapper.Map<List<Address>>(repo.GetLocationsByUserId(userId, currentPageIndex));
         }
 
         public void Add(Address address)

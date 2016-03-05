@@ -39,9 +39,9 @@ namespace WeatherInfo.Web.Services
                 _locationService = new LocationService(settingsService);
             }
 
-            public List<LocationInputModel> GetLocations()
+            public List<LocationInputModel> GetLocations(int currentPageIndex)
             {
-                return _locationService.GetLocations();
+                return _locationService.GetLocations(currentPageIndex);
             }
 
             public dynamic AddLocation(LocationInputModel model)

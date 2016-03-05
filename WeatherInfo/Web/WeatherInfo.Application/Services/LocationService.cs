@@ -12,11 +12,11 @@ namespace WeatherInfo.Application.Services
         {
         }
 
-        public List<LocationInputModel> GetLocations()
+        public List<LocationInputModel> GetLocations(int currentPageIndex)
         {
             var userId = new Guid("C49200FC-C271-4CC3-8905-086A2CE9AB4E");
             var location = new Location.Location(Settings);
-            return Mapper.Map<List<LocationInputModel>>(location.GetLocationsByUserId(userId));
+            return Mapper.Map<List<LocationInputModel>>(location.GetLocationsByUserId(userId, currentPageIndex));
         }
 
         // TODO: return a more complex type
