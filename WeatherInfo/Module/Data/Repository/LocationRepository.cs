@@ -37,19 +37,19 @@ namespace Data.Repository
             }
         }
 
-        public List<UserLocationDataModel> GetLocationsByUserId(Guid userId, int currentPageIndex)
+        public List<UserLocationDataModel> GetLocationsByUserId(Guid userId, int currentPageIndex, int previousSortOrder)
         {
             var take = 4; // TODO: get from configuration / settings
-            var skip = currentPageIndex * take;
             using (var db = GetConnection())
             {
                 const string query = @"
-select UserId, Latitude, Longitude, InputName, City, StateCode, CountryCode, SortOrder 
+select top(@Take) UserId, Latitude, Longitude, InputName, City, StateCode, CountryCode, SortOrder 
 from dbo.UserLocations (nolock) 
 where UserId = @UserId 
-order by SortOrder desc
-offset (@Skip) rows fetch next (@Take) rows only";
-                var locations = db.Query<UserLocationDataModel>(query, new { UserId = userId, Skip = skip, Take = take, }).ToList();
+and (@PreviousSortOrder = -1 or SortOrder < @PreviousSortOrder)
+order by SortOrder desc";
+
+                var locations = db.Query<UserLocationDataModel>(query, new { UserId = userId, PreviousSortOrder = previousSortOrder, Take = take, }).ToList();
 
                 return locations;
             }

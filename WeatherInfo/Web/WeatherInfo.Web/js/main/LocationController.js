@@ -19,7 +19,7 @@
             $scope.addSuccess = false;
             $scope.addFail = false;
 
-            $scope.indexes = { currentPageIndex: 0, };
+            $scope.indexes = { currentPageIndex: 0, previousSortIndex: -1, };
             $scope.showGetMore = false;
         };
 
@@ -92,7 +92,7 @@
 
             $scope.errorMessages = [];
 
-            locationService.getLocations($scope.indexes.currentPageIndex)
+            locationService.getLocations($scope.indexes.currentPageIndex, $scope.indexes.previousSortIndex)
                 .then(
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
@@ -114,7 +114,10 @@
 
         $scope.setLocations = function (locationData) { // HACK
             // TODO: change to locations.push(location) - we will need to make the property names the same
-            $scope.locations.push({ inputName: locationData.InputName, city: locationData.City, state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, });
+            $scope.locations.push({ inputName: locationData.InputName, city: locationData.City, state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, sortOrder: locationData.sortOrder, });
+            if ($scope.indexes.previousSortIndex == -1 || locationData.SortOrder < $scope.indexes.previousSortIndex) {
+                $scope.indexes.previousSortIndex = locationData.SortOrder;
+            }
         }
 
         $scope.setLocation = function (locationData) {

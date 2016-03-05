@@ -8,5 +8,6 @@
         public string City { get; set; }
         public string StateCode { get; set; }
         public string CountryCode { get; set; }
+        public int SortOrder { get; set; }
     }
 }
