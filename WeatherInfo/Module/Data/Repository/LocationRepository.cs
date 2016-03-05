@@ -37,7 +37,7 @@ namespace Data.Repository
             }
         }
 
-        public List<UserLocationDataModel> GetLocationsByUserId(Guid userId, int currentPageIndex, int previousSortOrder)
+        public List<UserLocationDataModel> GetLocationsByUserId(Guid userId, int previousSortOrder)
         {
             var take = 4; // TODO: get from configuration / settings
             using (var db = GetConnection())

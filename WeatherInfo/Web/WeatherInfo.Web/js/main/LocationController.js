@@ -19,7 +19,7 @@
             $scope.addSuccess = false;
             $scope.addFail = false;
 
-            $scope.indexes = { currentPageIndex: 0, previousSortIndex: -1, };
+            $scope.indexes = { previousSortIndex: -1, };
             $scope.showGetMore = false;
             $scope.isLoading = false;
         };
@@ -95,7 +95,7 @@
 
             $scope.errorMessages = [];
 
-            locationService.getLocations($scope.indexes.currentPageIndex, $scope.indexes.previousSortIndex)
+            locationService.getLocations($scope.indexes.previousSortIndex)
                 .then(
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
@@ -106,7 +106,6 @@
                         if (successCallback) {
                             successCallback(locationDataList);
                         }
-                        $scope.indexes.currentPageIndex++;
                         $scope.endFeedback();
                     },
                     function () {

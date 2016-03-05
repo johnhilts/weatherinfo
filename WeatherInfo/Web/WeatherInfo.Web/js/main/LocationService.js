@@ -19,13 +19,13 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
         return d.promise;
     };
 
-    var _getLocations = function (currentPageIndex, previousSortIndex) {
+    var _getLocations = function (previousSortIndex) {
         var d = $q.defer();
 
         $http({
             method: 'GET',
             url: '/api/Location',
-            params: { currentPageIndex: currentPageIndex, previousSortOrder: previousSortIndex },
+            params: { previousSortOrder: previousSortIndex },
         })
         .then(function (r) { _getLocationsSuccess(r); d.resolve(); }, function () { d.reject(); });
 
