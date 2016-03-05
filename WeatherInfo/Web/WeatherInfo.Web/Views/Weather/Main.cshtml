@@ -43,6 +43,9 @@
                     <span data-ng-cloak>{{locationData.inputName}} ({{locationData.city}}), {{locationData.state}}&nbsp;{{locationData.country}}</span>
                 </li>
             </ul>
+            <span data-ng-show="isLoading">loading...</span>
+            <span data-ng-show="isIos() && !isLoading">Pull up to get more data</span>
+            <span data-ng-show="showGetMore && !isIos() && !isLoading" data-ng-click="getLocations()">... get more ...</span>
         </div>
 
     </div>

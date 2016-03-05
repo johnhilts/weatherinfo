@@ -18,6 +18,9 @@
 
             $scope.addSuccess = false;
             $scope.addFail = false;
+
+            $scope.indexes = { currentPageIndex: 0, };
+            $scope.showGetMore = false;
         };
 
         $scope.modalOpen = function () {
@@ -89,7 +92,7 @@
 
             $scope.errorMessages = [];
 
-            locationService.getLocations(0)
+            locationService.getLocations($scope.indexes.currentPageIndex)
                 .then(
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
@@ -100,6 +103,7 @@
                         if (successCallback) {
                             successCallback(locationDataList);
                         }
+                        $scope.indexes.currentPageIndex++;
                     },
                     function () {
                         alert("location failed");

@@ -39,8 +39,8 @@ namespace Data.Repository
 
         public List<UserLocationDataModel> GetLocationsByUserId(Guid userId, int currentPageIndex)
         {
-            var skip = currentPageIndex;
-            var take = 4;
+            var take = 4; // TODO: get from configuration / settings
+            var skip = currentPageIndex * take;
             using (var db = GetConnection())
             {
                 const string query = @"

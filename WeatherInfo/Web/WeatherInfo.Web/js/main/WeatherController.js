@@ -16,9 +16,6 @@
     })
 
     .controller('weatherController', function ($scope, locationService, weatherService) {
-        // TODO: get stuff from the server on page-load
-
-        // TODO: pass a list of lat/long's from the server
         $scope.init = function () {
             $scope.currentLocationTemperature = "...";
             var previousUnitType = $scope.getPreviousUnitType("current");
@@ -91,8 +88,18 @@
 
         angular.element(document).ready(function () {
 
+            var setShowMoreButton = function () {
+                $scope.showGetMore = $(window).scrollTop() == 0; // TODO: is there a good way to detect a scroll bar?
+            };
+
             $scope.getCurrentLocation($scope.getCurrentWeather);
-            $scope.getLocations();
+            $scope.getLocations(setShowMoreButton);
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    $scope.getLocations(setShowMoreButton);
+                }
+            });
 
         });
     });
