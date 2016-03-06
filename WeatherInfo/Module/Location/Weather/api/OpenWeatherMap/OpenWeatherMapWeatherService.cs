@@ -54,7 +54,31 @@ namespace Location.Weather.OpenWeatherMap.api
             var openWeatherMapApiFormat = "http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}";
             var requestUrl = string.Format(openWeatherMapApiFormat, latitude, longitude, apiKey);
             var client = new WebClient();
-            var response = client.DownloadString(requestUrl);
+            var response = TolerantDownloadString(client, requestUrl);
+            return response;
+        }
+
+        private string TolerantDownloadString(WebClient client, string requestUrl)
+        {
+            string response = string.Empty;
+            var sleepSeconds = 1;
+            while (true)
+            {
+                try
+                {
+                    response = client.DownloadString(requestUrl);
+                    break;
+                }
+                catch (WebException exception)
+                {
+                    if (exception.Message.Contains("429")) // NOTE: HTTP 429 Too Many Requests
+                    {
+                        System.Threading.Thread.Sleep(sleepSeconds * 1000);
+                        sleepSeconds++;
+                    }
+                }
+            }
+
             return response;
         }
 
