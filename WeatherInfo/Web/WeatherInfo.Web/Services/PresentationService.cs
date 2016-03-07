@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Caching;
@@ -73,6 +74,9 @@ namespace WeatherInfo.Web.Services
                     model = _weatherService.GetCurrentWeatherByLocation(latitude, longitude);
                     context.Cache.Insert(cacheKey, model, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(30));
                 }
+
+                var helper = new DateTimeHelper();
+                model.TemperatureTimeText = helper.GetTimeText(model.WeatherQueryTime, DateTime.Now);
 
                 return model;
             }
