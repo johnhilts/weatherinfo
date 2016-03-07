@@ -6,6 +6,7 @@
                 scope.$parent.temperatureTimeText = weatherData.temperatureTimeText;
             };
             var locationData = { 'latitude': attributes["latitude"], 'longitude': attributes["longitude"] };
+            scope.temperature = '...';
             scope.getWeather({ 'locationData': locationData, 'successCallback': setWeather });
         };
         return {

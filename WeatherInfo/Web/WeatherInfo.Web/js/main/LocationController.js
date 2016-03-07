@@ -12,6 +12,7 @@
             $scope.showModal = false;
             $scope.address = "";
             $scope.city = "locating ...";
+            $scope.temperatureTimeText = "...";
 
             $scope.locations = [];
             //$scope.locations.push({ city: 'Burbank, ', state: 'CA', country: 'US', temperature: 69.1, unitType: 'F', });
