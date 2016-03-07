@@ -214,6 +214,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\General\General\Common.csproj">
+      <Project>{b512f684-c389-473a-805f-123415d6d203}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Module\Location\Location.csproj">
       <Project>{0569be38-b68e-4c67-b4db-7d43c163d2ab}</Project>
       <Name>Location</Name>

@@ -3,6 +3,7 @@
         var linkFunction = function (scope, element, attributes) {
             var setWeather = function (weatherData) {
                 scope.temperature = weatherData.currentTemperature;
+                scope.$parent.temperatureTimeText = weatherData.temperatureTimeText;
             };
             var locationData = { 'latitude': attributes["latitude"], 'longitude': attributes["longitude"] };
             scope.getWeather({ 'locationData': locationData, 'successCallback': setWeather });

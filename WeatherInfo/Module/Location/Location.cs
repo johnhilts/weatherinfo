@@ -28,6 +28,7 @@ namespace Location
             var currentWeather = weatherService.GetCurrentWeatherByLocation(latitude, longitude);
             currentWeather.UnitType = UnitType.Fahrenheit;
             currentWeather.Temperature = currentWeather.Temperature * 9 / 5 - 459.67m;
+            currentWeather.WeatherQueryTime = DateTime.Now;
 
             return currentWeather;
         }

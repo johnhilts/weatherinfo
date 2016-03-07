@@ -18,6 +18,7 @@ namespace WeatherInfo.Application.Services
             {
                 CurrentTemperature = decimal.Round(currentWeather.Temperature, 1),
                 UnitType = currentWeather.UnitType.ToString("g").Substring(0, 1).ToUpper(),
+                WeatherQueryTime = currentWeather.WeatherQueryTime,
             };
 
             return model;
