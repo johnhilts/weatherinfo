@@ -4,10 +4,10 @@ namespace Common
 {
     public class DateTimeHelper
     {
-        public string GetTimeText(DateTime postedTime, DateTime currentTime)
+        public string GetTimeText(DateTime queryTime, DateTime currentTime)
         {
             double roundedDifference;
-            TimeSpan timeSpan = currentTime - postedTime;
+            TimeSpan timeSpan = currentTime - queryTime;
             if (timeSpan.TotalMinutes < 1)
             {
                 double totalSeconds = timeSpan.TotalSeconds;

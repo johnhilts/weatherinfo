@@ -41,7 +41,7 @@
                 <li class="list-group-item">
                     <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{locationData.latitude}}" longitude="{{locationData.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>
                     <span data-ng-cloak>{{locationData.inputName}} ({{locationData.city}}), {{locationData.state}}&nbsp;{{locationData.country}}</span>
-                    <br /><span>(as of {{temperatureTimeText}})</span>
+                    <br /><span>(as of {{locationData.temperatureTimeText}})</span>
                 </li>
             </ul>
             <span data-ng-show="isLoading">loading...</span>
@@ -59,4 +59,5 @@
 @Scripts.Render("~/js/main/WeatherService.js")
 @Scripts.Render("~/js/main/LocationService.js")
 @Scripts.Render("~/js/main/GeoLocationService.js")
+@Scripts.Render("~/js/main/CommonService.js")
 }

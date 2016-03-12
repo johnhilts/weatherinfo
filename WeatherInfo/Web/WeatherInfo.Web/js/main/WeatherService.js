@@ -24,6 +24,7 @@ weatherModule.factory("weatherService", function ($http, $q) {
                     currentTemperature: result.data.CurrentTemperature,
                     currentUnitType: result.data.UnitType,
                     temperatureTimeText: result.data.TemperatureTimeText,
+                    weatherQueryTime: result.data.WeatherQueryTime,
                 };
                 _weatherData.push(weatherData);
             }

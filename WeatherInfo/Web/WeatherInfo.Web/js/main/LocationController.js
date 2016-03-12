@@ -6,13 +6,12 @@
         };
     })
 
-    .controller('locationController', function ($scope, $interval, locationService, weatherService) {
+    .controller('locationController', function ($scope, $interval, locationService, weatherService, commonService) {
 
         $scope.init = function () {
             $scope.showModal = false;
             $scope.address = "";
             $scope.city = "locating ...";
-            $scope.temperatureTimeText = "...";
 
             $scope.locations = [];
             //$scope.locations.push({ city: 'Burbank, ', state: 'CA', country: 'US', temperature: 69.1, unitType: 'F', });
@@ -23,6 +22,8 @@
             $scope.indexes = { previousSortIndex: -1, };
             $scope.showGetMore = false;
             $scope.isLoading = false;
+
+            $interval($scope.updateQueryTimeText, 10000);
         };
 
         $scope.modalOpen = function () {
@@ -119,7 +120,7 @@
 
         $scope.setLocations = function (locationData) { // HACK
             // TODO: change to locations.push(location) - we will need to make the property names the same
-            $scope.locations.push({ inputName: locationData.InputName, city: locationData.City, state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, sortOrder: locationData.sortOrder, });
+            $scope.locations.push({ inputName: locationData.InputName, city: locationData.City, state: locationData.StateCode, country: locationData.CountryCode, latitude: locationData.Latitude, longitude: locationData.Longitude, sortOrder: locationData.sortOrder, temperatureTimeText: "...", });
             if ($scope.indexes.previousSortIndex == -1 || locationData.SortOrder < $scope.indexes.previousSortIndex) {
                 $scope.indexes.previousSortIndex = locationData.SortOrder;
             }
@@ -152,6 +153,22 @@
             $scope.addSuccess = false;
             $scope.addFail = false;
         }
+
+        $scope.updateQueryTimeText = function () {
+            for (var i = 0; i < $scope.locations.length; i++) {
+                (function (i) {
+                    commonService.getQueryTimeText($scope.locations[i].weatherQueryTime)
+                    .then(
+                        function () { 
+                            $scope.locations[i].temperatureTimeText = commonService.updateQueryTimeText.text;
+                        },
+                        function () {
+                            // don't do anything ... it's just a text update, not important if it fails
+                        }
+                    );
+                })(i);
+            }
+        };
 
         $scope.startFeedback =
             function () {
