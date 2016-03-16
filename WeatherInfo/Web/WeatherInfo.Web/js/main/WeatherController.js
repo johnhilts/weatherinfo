@@ -20,19 +20,13 @@
 
     .controller('weatherController', function ($scope, locationService, weatherService) {
         $scope.init = function () {
-            $scope.currentLocationTemperature = "...";
             var previousUnitType = $scope.getPreviousUnitType("current");
-            $scope.currentLocationUnitType = previousUnitType;
             if (previousUnitType) {
                 $scope.unitType = $scope.getPreviousUnitType("current");
             }
             else {
                 $scope.unitType = "F";
             }
-        };
-
-        $scope.getCurrentWeather = function (locationData) {
-            $scope.getWeather(locationData, $scope.setCurrentWeather);
         };
 
         $scope.getWeather = function (locationData, successCallback) {
@@ -58,12 +52,6 @@
                 );
 
         };
-
-        $scope.setCurrentWeather = function (weatherData) {
-            $scope.currentLocationTemperature = weatherData.currentTemperature;
-            $scope.currentLocationUnitType = $scope.unitType;
-            $scope.setPreviousUnitType("current", $scope.unitType);
-        }
 
         $scope.getPreviousUnitType = function (key) {
 
@@ -95,7 +83,7 @@
                 $scope.showGetMore = $(window).scrollTop() == 0; // TODO: is there a good way to detect a scroll bar?
             };
 
-            $scope.getCurrentLocation($scope.getCurrentWeather);
+            $scope.getCurrentLocation();
             $scope.getLocations(setShowMoreButton);
 
             $(window).scroll(function () {

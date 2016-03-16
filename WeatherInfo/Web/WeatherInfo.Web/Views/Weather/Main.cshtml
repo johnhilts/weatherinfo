@@ -31,12 +31,6 @@
     <div data-ng-controller="weatherController" data-ng-init="init()">
         <input type="hidden" data-ng-model="unitType" />
         <div>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <span class="badge"><span data-ng-cloak>{{currentLocationTemperature}}</span>&deg; <span data-ng-cloak>{{currentLocationUnitType}}</span></span>
-                    Current Location <span data-ng-cloak>{{locationData.inputName}} ({{city}}, {{state}}&nbsp;{{country}}</span>)
-                </li>
-            </ul>
             <ul class="list-group" data-ng-repeat="locationData in locations" data-ng-cloak>
                 <li class="list-group-item">
                     <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{locationData.latitude}}" longitude="{{locationData.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>

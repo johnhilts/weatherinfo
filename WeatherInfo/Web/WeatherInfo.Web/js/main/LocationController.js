@@ -10,8 +10,6 @@
 
         $scope.init = function () {
             $scope.showModal = false;
-            $scope.address = "";
-            $scope.city = "locating ...";
 
             $scope.locations = [];
             //$scope.locations.push({ city: 'Burbank, ', state: 'CA', country: 'US', temperature: 69.1, unitType: 'F', });
@@ -52,7 +50,7 @@
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
                         var locationData = locationService.locationData.pop();
-                        $scope.setLocation(locationData);
+                        $scope.setLocation(locationData, false);
                         $scope.modalCancel();
                         $scope.addLocation(locationData);
                     },
@@ -72,7 +70,8 @@
                     function () {
                         $scope.errorMessages = locationService.errorMessages;
                         var locationData = locationService.locationData.pop();
-                        $scope.setCurrentLocation(locationData);
+                        locationData.inputName = "Current Location";
+                        $scope.setLocation(locationData, true);
                         if (successCallback) {
                             successCallback(locationData);
                         }
@@ -82,13 +81,6 @@
                     }
                 );
 
-        }
-
-        $scope.setCurrentLocation = function (locationData) {
-            $scope.inputName = locationData.inputName;
-            $scope.city = locationData.city;
-            $scope.state = locationData.stateCode;
-            $scope.country = locationData.countryCode;
         }
 
         $scope.getLocations = function (successCallback) {
@@ -126,9 +118,10 @@
             }
         }
 
-        $scope.setLocation = function (locationData) {
+        $scope.setLocation = function (locationData, isCurrent) {
             // TODO: change to locations.push(location) - we will need to make the property names the same
-            $scope.locations.splice(0, 0, { inputName: locationData.inputName, city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
+            var insertIndex = isCurrent ? 0 : 1;
+            $scope.locations.splice(insertIndex, 0, { inputName: locationData.inputName, city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, latitude: locationData.latitude, longitude: locationData.longitude, });
         }
 
         $scope.addLocation = function (locationData) {
