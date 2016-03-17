@@ -21,6 +21,8 @@
             $scope.showGetMore = false;
             $scope.isLoading = false;
 
+            $scope.isEditMode = false;
+
             $interval($scope.updateQueryTimeText, 10000);
         };
 
@@ -161,6 +163,10 @@
                     );
                 })(i);
             }
+        };
+
+        $scope.setEditMode = function (isEditMode) {
+            $scope.isEditMode = isEditMode;
         };
 
         $scope.startFeedback =

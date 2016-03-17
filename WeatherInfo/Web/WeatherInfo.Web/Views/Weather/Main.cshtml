@@ -31,13 +31,21 @@
     <div data-ng-controller="weatherController" data-ng-init="init()">
         <input type="hidden" data-ng-model="unitType" />
         <div>
+            <span data-ng-show="isEditMode"><a data-ng-click="setEditMode(!isEditMode)" class="setEditMode">Cancel Edit</a><br /><br /></span>
             <ul class="list-group" data-ng-repeat="locationData in locations" data-ng-cloak>
                 <li class="list-group-item">
                     <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{locationData.latitude}}" longitude="{{locationData.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>
+                    <span data-ng-show="isEditMode">
+                        <button type="button" class="btn btn-danger" data-ng-click="removeLocation()">
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                        </button>
+                        &nbsp;
+                    </span>
                     <span data-ng-cloak>{{locationData.inputName}} ({{locationData.city}}), {{locationData.state}}&nbsp;{{locationData.country}}</span>
                     <br /><span>(as of {{locationData.temperatureTimeText}})</span>
                 </li>
             </ul>
+            <span data-ng-show="isEditMode"><a data-ng-click="setEditMode(!isEditMode)" class="setEditMode">Cancel Edit</a><br /><br /></span>
             <span data-ng-show="isLoading">loading...</span>
             <span data-ng-show="isIos() && !isLoading">Pull up to get more data</span>
             <a data-ng-show="showGetMore && !isIos() && !isLoading" data-ng-click="getLocations()">... get more ...</a>
@@ -54,4 +62,16 @@
 @Scripts.Render("~/js/main/LocationService.js")
 @Scripts.Render("~/js/main/GeoLocationService.js")
 @Scripts.Render("~/js/main/CommonService.js")
+<script>
+    var editObserver =
+        function () {
+            var appContainer = $("div[data-ng-app='weather-main']");
+            var scope = angular.element(appContainer).scope();
+            scope.$apply(function () {
+                scope.isEditMode = weatherInfo.isEditMode();
+            });
+        };
+    $("#setEditMode").click(editObserver);
+    $(".setEditMode").click(function () { weatherInfo.setEditMode(!weatherInfo.isEditMode()); });
+</script>
 }

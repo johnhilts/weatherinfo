@@ -22,6 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("by Location", "Main", "Weather")</li>
+                    <li><a id="setEditMode" href="#" onclick="weatherInfo.setEditMode(!weatherInfo.isEditMode()); return false;">Edit</a></li>
                 </ul>
             </div>
         </div>

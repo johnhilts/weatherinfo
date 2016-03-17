@@ -18,5 +18,17 @@
 
     _weatherInfo.weatherApp = angular.module("weather-main", ["ui.bootstrap.modal"]);
 
+    var _isEditMode = false;
+
+    _weatherInfo.setEditMode =
+        function (isEditMode) {
+            _isEditMode = isEditMode;
+        };
+
+    _weatherInfo.isEditMode =
+        function () {
+            return _isEditMode;
+        };
+
     return _weatherInfo;
 }());
