@@ -36,7 +36,7 @@
                 <li class="list-group-item">
                     <span class="badge"><span data-ng-cloak><location-Temperature get-weather="getWeather(locationData, successCallback)" latitude="{{locationData.latitude}}" longitude="{{locationData.longitude}}"></location-Temperature></span>&deg; <span data-ng-cloak>{{unitType}}</span></span>
                     <span data-ng-show="isEditMode">
-                        <button type="button" class="btn btn-danger" data-ng-click="removeLocation()">
+                        <button type="button" class="btn btn-danger" data-ng-click="removeLocation(locationData)">
                             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                         </button>
                         &nbsp;

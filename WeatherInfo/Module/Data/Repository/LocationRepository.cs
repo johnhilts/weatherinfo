@@ -54,5 +54,17 @@ order by SortOrder desc";
                 return locations;
             }
         }
+
+        public void DeleteLocationsByUserId(Guid userId, decimal longitude, decimal latitude)
+        {
+            using (var db = GetConnection())
+            {
+                db.Execute(
+                    @"
+                delete from dbo.UserLocations 
+                where UserId = @UserId and Latitude = @Latitude and Longitude = @Longitude",
+                    new { UserId = userId, Longitude = longitude, Latitude = latitude, });
+            }
+        }
     }
 }

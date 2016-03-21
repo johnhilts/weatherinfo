@@ -82,12 +82,40 @@ weatherModule.factory("locationService", function ($http, $q, geoLocationService
         return d.promise;
     };
 
+    var _removeLocation = function (longitude, latitude) {
+        var d = $q.defer();
+        $http({
+            method: 'DELETE',
+            url: '/api/Location',
+            data: $.param({ longitude: longitude, latitude: latitude, }),  // pass in data as strings
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .then(
+            function (r) {
+                if (r.data.Success) {
+                    _errorMessages.length = 0;
+                    _response.success = true;
+                }
+                else {
+                    r.data.ErrorMessages.forEach(function (x) { _errorMessages.push(x); });
+                    _response.success = false;
+                }
+                 d.resolve();
+            },
+            function () {
+                _response.success = false;
+                d.reject();
+            });
+        return d.promise;
+    };
+
     return {
         locationData: _locationData,
         response: _response,
         getCurrentLocation: _getCurrentLocation,
         getLocations: _getLocations,
         addLocation: _addLocation,
+        removeLocation: _removeLocation,
         searchLocation: _searchLocation,
         errorMessages: _errorMessages,
     };

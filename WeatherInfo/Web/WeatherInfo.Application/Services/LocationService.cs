@@ -30,5 +30,13 @@ namespace WeatherInfo.Application.Services
             return true;
         }
 
+        // TODO: return a more complex type
+        public bool RemoveLocation(decimal longitude, decimal latitude)
+        {
+            var location = new Location.Location(Settings);
+            location.Remove(longitude, latitude);
+
+            return true;
+        }
     }
 }

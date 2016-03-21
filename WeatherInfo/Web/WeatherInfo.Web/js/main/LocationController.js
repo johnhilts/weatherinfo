@@ -165,6 +165,32 @@
             }
         };
 
+        $scope.removeLocation = function (locationData) {
+
+            $scope.errorMessages = [];
+
+            var index = $scope.locations.indexOf(locationData);
+            if (index >= 0) {
+                $scope.locations.splice(index, 1);
+            }
+            else {
+                return;
+            }
+            
+            $scope.getLocations();
+
+            locationService.removeLocation(locationData.longitude, locationData.latitude)
+                .then(
+                    function () {
+                        $scope.errorMessages = locationService.errorMessages;
+                    },
+                    function () {
+                        // delete fail
+                    }
+                );
+
+        };
+
         $scope.setEditMode = function (isEditMode) {
             $scope.isEditMode = isEditMode;
         };

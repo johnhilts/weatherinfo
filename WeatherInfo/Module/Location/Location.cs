@@ -47,5 +47,12 @@ namespace Location
             repo.AddUserLocation(dataModel);
         }
 
+        public void Remove(decimal longitude, decimal latitude)
+        {
+            var repo = new LocationRepository(_settings);
+            var userId = new Guid("C49200FC-C271-4CC3-8905-086A2CE9AB4E");
+            repo.DeleteLocationsByUserId(userId, longitude, latitude);
+        }
+
     }
 }

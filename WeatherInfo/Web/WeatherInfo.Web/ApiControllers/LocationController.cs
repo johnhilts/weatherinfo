@@ -14,5 +14,11 @@ namespace WeatherInfo.Web.ApiControllers
         {
             return PresentationService.Location.AddLocation(model);
         }
+
+        public dynamic Delete(decimal longitude, decimal latitude)
+        {
+            return PresentationService.Location.RemoveLocation(longitude, latitude);
+        }
+
     }
 }

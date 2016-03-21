@@ -52,6 +52,14 @@ namespace WeatherInfo.Web.Services
                 else
                     return new { Success = false, };
             }
+
+            public dynamic RemoveLocation(decimal longitude, decimal latitude)
+            {
+                if (_locationService.RemoveLocation(longitude, latitude))
+                    return new { Success = true, };
+                else
+                    return new { Success = false, };
+            }
         }
 
         public class PresentationWeather
