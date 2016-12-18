@@ -233,3 +233,16 @@ _Pvt_Extensions
 # environment specific
 env/
 
+# from create-react-app
+
+# testing
+coverage
+
+# production
+build
+
+# misc
+.DS_Store
+.env
+npm-debug.log
+
