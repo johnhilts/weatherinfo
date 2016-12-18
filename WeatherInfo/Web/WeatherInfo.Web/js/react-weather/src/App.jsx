@@ -13,6 +13,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <p>Using the JSX extension now!</p>
+        <p>1 more test</p>
       </div>
     );
   }
