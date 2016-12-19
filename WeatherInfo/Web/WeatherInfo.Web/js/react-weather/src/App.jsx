@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import LocationContainer from './Containers/LocationContainer';
 
 class App extends Component {
   render() {
+
+    const showAddLocationForm = () => {return false;};
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+
+        <div className="container body-content">
+            <h2>
+                Weather by Location &nbsp; &nbsp;
+                <button type="button" className="btn btn-info" onClick={showAddLocationForm}>
+                    <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </h2>
+        
+            <LocationContainer {...this.props} />
+
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>Using the JSX extension now!</p>
-        <p>1 more test</p>
-      </div>
     );
   }
 }
