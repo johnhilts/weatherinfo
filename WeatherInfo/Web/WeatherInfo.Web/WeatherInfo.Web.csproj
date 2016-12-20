@@ -184,6 +184,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="js\react-weather\package.json" />
+    <Content Include="js\react-weather\src\Containers\LocationContainer.jsx" />
+    <Content Include="js\react-weather\src\geoLocationHelper.jsx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="js\WeatherInfo.main.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -237,9 +239,6 @@
       <Project>{9c08e34b-2ec8-4ab4-ae2f-766697e8baf0}</Project>
       <Name>WeatherInfo.Application</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="js\react-weather\src\Components\LocationTemperature.jsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -28,7 +28,9 @@ const Location = (props) => {
             {inputName : 'Test 3', city : 'Testville', state : 'NV', country : 'US', temperatureTimeText : '125 minutes ago', key : 125, },
             {inputName : 'Test 4', city : 'Testville', state : 'NV', country : 'US', temperatureTimeText : '126 minutes ago', key : 126, },
         ];
-    locations.push(props.weatherData[0]);
+    if (props.locations && props.locations[0]) {
+        locations.push(props.locations[0]);
+    }
     const setEditMode = (isEditMode) => {return false;};
     const cancelEdit = isEditMode ? <span><a onClick={setEditMode.bind(null, !isEditMode)} className="setEditMode">Cancel Edit</a><br /><br /></span> : <span />
     let isLoading = false;
@@ -40,9 +42,9 @@ const Location = (props) => {
     let getMoreLocationsPrompt = (showGetMore && !isIos() && !isLoading) ? <a onClick={getLocations}>... get more ...</a> : <span />
     let temperature = '80';
 
-    const listOfLocations = (locationData) => {
+    const listOfLocations = (locationData, index) => {
         return (
-            <li className="list-group-item" key={locationData.key}>
+            <li className="list-group-item" key={index}>
                 <span className="badge"><span>{temperature}</span>&deg; <span>{unitType}</span></span>
                 <DeleteButton isEditMode={isEditMode} locations={locations} />
                 <span>{locationData.inputName} ({locationData.city}), {locationData.state}&nbsp;{locationData.country}</span>
