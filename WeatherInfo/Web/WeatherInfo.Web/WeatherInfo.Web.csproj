@@ -171,6 +171,8 @@
     <Content Include="js\react-weather\public\index.html" />
     <Content Include="js\react-weather\src\App.css" />
     <None Include="js\react-weather\src\App.jsx" />
+    <Content Include="js\react-weather\src\Components\AddLocation.jsx" />
+    <Content Include="js\react-weather\src\Components\AddLocationButton.jsx" />
     <None Include="js\react-weather\src\Components\Location.jsx" />
     <Content Include="js\react-weather\src\index.css" />
     <Content Include="js\react-weather\src\index.js" />
@@ -185,7 +187,8 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="js\react-weather\package.json" />
     <Content Include="js\react-weather\src\Containers\LocationContainer.jsx" />
-    <Content Include="js\react-weather\src\geoLocationHelper.jsx" />
+    <Content Include="js\react-weather\src\utils\geoLocationHelper.jsx" />
+    <Content Include="js\react-weather\src\Containers\AddLocationContainer.jsx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="js\WeatherInfo.main.js" />
     <Content Include="Scripts\bootstrap.js" />

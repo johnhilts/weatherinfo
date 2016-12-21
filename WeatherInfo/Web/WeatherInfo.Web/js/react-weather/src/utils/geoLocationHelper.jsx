@@ -1,8 +1,13 @@
 ﻿const hasGeoLocation = navigator && navigator.geolocation;
+
+const getEmptyLocation = () => {
+    return { latitude: 0, longitude: 0, city: '', stateCode: '', countryCode: '', inputName: '', };
+}
+
 let globals = {
     externalSetAddressCallback: null,
     errorMessage: '',
-    locationData: {},
+    locationData: getEmptyLocation(),
 };
 
 export const getCurrentLocation = (externalSetAddressCallback) => {
@@ -64,6 +69,21 @@ const setAddressFields = (addressInfo) => {
                 globals.locationData.countryCode = shortName;
                 break;
         }
+    }
+}
+
+export const searchLocation = (address, externalSetAddressCallback) => {
+    if (hasGeoLocation) {
+        globals.locationData = getEmptyLocation();
+        globals.locationData.inputName = address;
+        let geocoder = new window.google.maps.Geocoder();
+        globals.externalSetAddressCallback = externalSetAddressCallback;
+        geocoder.geocode({ 'address': address },
+            function (results, status) {
+                globals.setLocationByAddressCallback(results, status);
+            }
+            ,
+            globals.getCurrentLocationError);
     }
 }
 

@@ -2,6 +2,7 @@
 import axios from 'axios';
 import * as geoLocation from '../utils/geoLocationHelper';
 import Location from '../Components/Location';
+import AddLocationButton from '../Components/AddLocationButton';
 
 class LocationContainer extends Component {
     constructor() {
@@ -13,6 +14,8 @@ class LocationContainer extends Component {
         this.getLocations = this.getLocations.bind(this);
         this.getCurrentWeather = this.getCurrentWeather.bind(this);
         this.updateQueryTimeText = this.updateQueryTimeText.bind(this);
+        this.showAddLocationForm = this.showAddLocationForm.bind(this);
+        this.modalOpen = this.modalOpen.bind(this);
     
         let previousUnitType = this.getPreviousUnitType("current");
         let unitType = 'F';
@@ -24,7 +27,7 @@ class LocationContainer extends Component {
         // window.setInterval(this.updateQueryTimeText, 10000);
 
         this.state = {locations: [], unitType: unitType, previousUnitType: previousUnitType, 
-            domain: '192.168.0.172', showModal: false, addFail: false, indexes: {previousSortIndex: -1, }, showGetMore: false, isLoading: true, isEditMode: false, };
+            domain: '192.168.1.18', showModal: false, addFail: false, indexes: {previousSortIndex: -1, }, showGetMore: false, isLoading: true, isEditMode: false, };
     }
 
     // NOTE: componentDidMount is used to initialize a component with server-side info
@@ -44,7 +47,7 @@ class LocationContainer extends Component {
                 { inputName: "Current Location", city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, 
                     latitude: locationData.latitude, longitude: locationData.longitude, });
             this.setState({locations: locations, }, 
-                this.getCurrentWeather(this.state.locations[0].latitude, this.state.locations[0].longitude, 0));
+                this.getCurrentWeather(this.state.locations[insertIndex].latitude, this.state.locations[insertIndex].longitude, insertIndex));
         }
 
         geoLocation.getCurrentLocation(setAddressCallback);
@@ -166,14 +169,29 @@ class LocationContainer extends Component {
         }
     }
 
+    modalOpen() {
+        this.setState({showModal: true});
+    }
+
+    // this is a duplicate!!
+    /*
+    addLocationAlertReset() {
+        clearInterval(this.state.addLocationAlertResetId);
+        this.setState({addSuccess: false, addFail: false, addLocationAlertResetId: 0, });
+    }
+    */
+
+    showAddLocationForm() {
+        // this.addLocationAlertReset();
+        this.modalOpen();
+    }
+
     render() {
         // adding a bunch of temporary declarations
         let addSuccess = false;
         let addFail = false;
 
-        let showModal = false;
-
-        let modal = showModal ?
+        let modal = this.state.showModal ?
                 <div modal="showModal" close="modalCancel()">
                     <div className="col-md-3"></div>
                     <add-location className="col-md-6"></add-location>
@@ -198,6 +216,11 @@ class LocationContainer extends Component {
 
         return (
         <div>
+            <h2>
+                Weather by Location &nbsp; &nbsp;
+                <AddLocationButton showAddLocationForm={this.showAddLocationForm} />
+            </h2>
+
             {modal}
 
             {addSuccessAlert}
