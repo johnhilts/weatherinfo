@@ -4,15 +4,15 @@ import * as geoLocation from '../utils/geoLocationHelper';
 import AddLocation from '../Components/AddLocation';
 
 class AddLocationContainer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.searchLocation = this.searchLocation.bind(this);
         this.setLocation = this.setLocation.bind(this);
         this.modalCancel = this.modalCancel.bind(this);
         this.addLocation = this.addLocation.bind(this);
         this.addLocationAlertReset = this.addLocationAlertReset.bind(this);
-        this.state = {errorMessages: '', locations: this.props.locations, addSuccess: false, unitType: unitType, previousUnitType: previousUnitType, 
+        this.state = {errorMessages: '', locations: props.locations, addSuccess: false, 
             domain: '192.168.1.18', showModal: false, addFail: false, indexes: {previousSortIndex: -1, }, showGetMore: false, isLoading: true, isEditMode: false, };
     }
 

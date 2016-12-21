@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as geoLocation from '../utils/geoLocationHelper';
 import Location from '../Components/Location';
 import AddLocationButton from '../Components/AddLocationButton';
+import AddLocationContainer from '../Containers/AddLocationContainer';
 
 class LocationContainer extends Component {
     constructor() {
@@ -181,7 +182,8 @@ class LocationContainer extends Component {
     }
     */
 
-    showAddLocationForm() {
+    showAddLocationForm(event) {
+		event.preventDefault();
         // this.addLocationAlertReset();
         this.modalOpen();
     }
@@ -192,10 +194,14 @@ class LocationContainer extends Component {
         let addFail = false;
 
         let modal = this.state.showModal ?
-                <div modal="showModal" close="modalCancel()">
-                    <div className="col-md-3"></div>
-                    <add-location className="col-md-6"></add-location>
-                    <div className="col-md-3"></div>
+                <div id='addLocationModal' className="modal fade" tabIndex="-1" role="dialog">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="col-md-3"></div>
+                            <AddLocationContainer locations={this.state.locations} className="col-md-6"></AddLocationContainer>
+                            <div className="col-md-3"></div>
+                        </div>
+                    </div>
                 </div>
             : <span />
 
