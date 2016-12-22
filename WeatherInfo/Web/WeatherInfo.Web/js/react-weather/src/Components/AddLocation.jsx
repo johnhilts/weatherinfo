@@ -10,7 +10,7 @@ export const AddLocation = (props) => {
                 <div style={{backgroundColor: 'white', marginBottom: '15px', }}>
                     <div>
                         <input type="text" placeholder="Enter Location Here" data-ng-model="address" autoFocus />&nbsp;
-                        <button className="btn btn-success">Search</button>
+                        <button className="btn btn-success" data-toggle="modal" data-target='#addLocationModal'>Search</button>
                     </div>
                 </div>
                 <div>&nbsp;</div>

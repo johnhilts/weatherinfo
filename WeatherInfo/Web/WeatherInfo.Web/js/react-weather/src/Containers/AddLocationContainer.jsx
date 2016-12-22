@@ -9,11 +9,10 @@ class AddLocationContainer extends Component {
 
         this.searchLocation = this.searchLocation.bind(this);
         this.setLocation = this.setLocation.bind(this);
-        this.modalCancel = this.modalCancel.bind(this);
         this.addLocation = this.addLocation.bind(this);
         this.addLocationAlertReset = this.addLocationAlertReset.bind(this);
         this.state = {errorMessages: '', locations: props.locations, addSuccess: false, 
-            domain: '192.168.1.18', showModal: false, addFail: false, indexes: {previousSortIndex: -1, }, showGetMore: false, isLoading: true, isEditMode: false, };
+            domain: '192.168.1.18', addFail: false, indexes: {previousSortIndex: -1, }, showGetMore: false, isLoading: true, isEditMode: false, };
     }
 
     // this is a duplicate!! the duplicate isn't in its own function, but it used to be
@@ -25,11 +24,7 @@ class AddLocationContainer extends Component {
             { inputName: locationData.inputName, city: locationData.city, state: locationData.stateCode, country: locationData.countryCode, 
                 latitude: locationData.latitude, longitude: locationData.longitude, });
         this.setState({locations: locations, }, 
-                this.getCurrentWeather(this.state.locations[insertIndex].latitude, this.state.locations[insertIndex].longitude, insertIndex));
-    }
-
-    modalCancel() {
-        this.setState({showModal: false, });
+                this.props.getCurrentWeather(this.state.locations[insertIndex].latitude, this.state.locations[insertIndex].longitude, insertIndex));
     }
 
     searchLocation(event) {
@@ -38,11 +33,11 @@ class AddLocationContainer extends Component {
         const searchLocationCallback = (locationData) => {
             // this.state.errorMessages = locationService.errorMessages;
             this.setLocation(locationData, false);
-            this.modalCancel();
+            // this.props.modalCancel();
             this.addLocation(locationData);
         }
 
-		let address = event.target[0];
+		let address = event.target[0].value;
 
 		geoLocation.searchLocation(address, searchLocationCallback);
                         // alert("location add failed");
@@ -61,15 +56,21 @@ class AddLocationContainer extends Component {
             this.setState({addSuccess: true, addLocationAlertResetId: addLocationAlertResetId, });
         }
 
+        const postLocationOnError = (err) => {
+            this.setState({addFail: true, errorMessages: err.message, });
+        }
+
         postLocation(locationData)
             .then(postLocationCallback)
-        .catch(function(err) {this.setState({addFail: true, });})
-
+            .catch(postLocationOnError)
     }
 
+    // NOTE: displaying the add location alert is something we have to do either before closing this, or in a different component
+    // for now, will close the "main" component after finishing with the alert ... can change it back later
     addLocationAlertReset() {
         clearInterval(this.state.addLocationAlertResetId);
-        this.setState({addSuccess: false, addFail: false, addLocationAlertResetId: 0, });
+        // this.setState({addLocationAlertResetId: 0, }, this.props.modalCancel());
+        this.props.modalCancel()
     }
 
     render(){

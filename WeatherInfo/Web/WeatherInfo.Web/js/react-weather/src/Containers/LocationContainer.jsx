@@ -17,6 +17,7 @@ class LocationContainer extends Component {
         this.updateQueryTimeText = this.updateQueryTimeText.bind(this);
         this.showAddLocationForm = this.showAddLocationForm.bind(this);
         this.modalOpen = this.modalOpen.bind(this);
+        this.modalCancel = this.modalCancel.bind(this);
     
         let previousUnitType = this.getPreviousUnitType("current");
         let unitType = 'F';
@@ -174,6 +175,10 @@ class LocationContainer extends Component {
         this.setState({showModal: true});
     }
 
+    modalCancel() {
+        this.setState({showModal: false, });
+    }
+
     // this is a duplicate!!
     /*
     addLocationAlertReset() {
@@ -198,7 +203,12 @@ class LocationContainer extends Component {
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
                             <div className="col-md-3"></div>
-                            <AddLocationContainer locations={this.state.locations} className="col-md-6"></AddLocationContainer>
+                            <AddLocationContainer 
+                                locations={this.state.locations} 
+                                getCurrentWeather={this.getCurrentWeather} 
+                                modalCancel={this.modalCancel}
+                                className="col-md-6"
+                            />
                             <div className="col-md-3"></div>
                         </div>
                     </div>

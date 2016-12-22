@@ -72,6 +72,16 @@ const setAddressFields = (addressInfo) => {
     }
 }
 
+const setLocationByAddressCallback = (results, status) => {
+    if (status == window.google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+            globals.locationData.latitude = results[0].geometry.location.lat();
+            globals.locationData.longitude = results[0].geometry.location.lng();
+            setAddress();
+        }
+    }
+}
+
 export const searchLocation = (address, externalSetAddressCallback) => {
     if (hasGeoLocation) {
         globals.locationData = getEmptyLocation();
@@ -80,7 +90,7 @@ export const searchLocation = (address, externalSetAddressCallback) => {
         globals.externalSetAddressCallback = externalSetAddressCallback;
         geocoder.geocode({ 'address': address },
             function (results, status) {
-                globals.setLocationByAddressCallback(results, status);
+                setLocationByAddressCallback(results, status);
             }
             ,
             globals.getCurrentLocationError);
