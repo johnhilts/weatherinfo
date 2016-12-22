@@ -4,6 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
 using Application.Map;
+using System.Linq;
 
 namespace WeatherInfo.Web
 {
@@ -22,6 +23,16 @@ namespace WeatherInfo.Web
                 x.AddProfile<MapProfile>(); // application
                 x.AddProfile<Location.Map.MapProfile>();
             });
+        }
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.Headers.AllKeys.Contains("origin") && Request.HttpMethod == "OPTIONS")
+            {
+                //Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, Session");
+                Response.Flush();
+            }
         }
 
     }
